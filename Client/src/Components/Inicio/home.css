@@ -1,0 +1,9 @@
+.containerHeader{
+    background: #ab3428;
+}
+
+.containerTendencias {
+    height: fit-content;
+    background: rgb(13, 13, 13);
+    background: linear-gradient(0deg, rgba(13, 13, 13, 1) 20%, rgba(171, 52, 40, 1) 100%);
+}

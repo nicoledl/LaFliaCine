@@ -1,0 +1,48 @@
+.button-login {
+    background-color: #ffff;
+    margin-right: 20px;
+    box-sizing: border-box;
+    color: #131313;
+    display: flex;
+    font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1rem;
+    font-weight: 700;
+    justify-content: center;
+    line-height: 1.75rem;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-decoration-thickness: auto;
+    max-width: 460px;
+    cursor: pointer;
+    transform: rotate(-2deg);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-login:focus {
+    outline: 0;
+}
+
+.button-login:after {
+    content: '';
+    position: absolute;
+    border: 1px solid #F49E4C;
+    bottom: 4px;
+    left: 4px;
+    width: calc(100% - 1px);
+    height: calc(100% - 1px);
+}
+
+.button-login:hover:after {
+    bottom: 2px;
+    left: 2px;
+}
+
+@media (min-width: 768px) {
+    .button-login {
+        padding: .30rem 1rem;
+        font-size: 1rem;
+    }
+}

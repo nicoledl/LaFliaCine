@@ -1,0 +1,3 @@
+$lightColor: #F5EE9E;
+$darkColor: #F49E4C;
+$bgColor: #AB3428;
