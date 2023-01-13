@@ -1,10 +1,10 @@
-import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import Modal from '@mui/material/Modal';
-import Backdrop from "@mui/material/Backdrop";
 import { Box } from "@mui/system";
 import { useState } from "react";
-import { Grid, Typography } from "@mui/material";
+import { Container, ImageList, ImageListItemBar, Typography } from "@mui/material";
+import IconButton from '@mui/material/IconButton';
+import InfoIcon from '@mui/icons-material/Info';
 
 const style = {
   position: 'absolute',
@@ -19,22 +19,7 @@ const style = {
   p: 4,
 };
 
-// const styles = theme => ({
-//   root: {
-//     padding: theme.spacing.unit,
-//     [theme.breakpoints.down('sm')]: {
-//       backgroundColor: theme.palette.secondary.main,
-//     },
-//     [theme.breakpoints.up('md')]: {
-//       backgroundColor: theme.palette.primary.main,
-//     },
-//     [theme.breakpoints.up('lg')]: {
-//       backgroundColor: green[500],
-//     },
-//   },
-// });
-
-const MediaCard = (props) => {
+const MediaCard = ({ contenido, apiImg }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -43,74 +28,66 @@ const MediaCard = (props) => {
     "https://canalcocina.es/medias/publicuploads/2015/07/07/147549/846988273559c066aac7193.09884642.png";
 
 
-  function modal(name, detail) {
-    return (
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-        sx={{
-          overflow: "scroll"
-        }}
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            {name}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {detail}
-          </Typography>
-        </Box>
-      </Modal>
-    )
-  }
+  // function modal(data) {
+  //   console.log(data)
+  //   return (
+  //     <Modal
+  //       aria-labelledby="transition-modal-title"
+  //       aria-describedby="transition-modal-description"
+  //       open={open}
+  //       onClose={handleClose}
+  //       closeAfterTransition
+  //       sx={{
+  //         overflow: "scroll"
+  //       }}
+  //     >
+  //       <Box sx={style}>
+  //         <Typography id="modal-modal-title" variant="h6" component="h2">
+  //           { data.media_type === "tv" ? data.name : data.title}
+  //         </Typography>
+  //         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+  //           {data.overview}
+  //         </Typography>
+  //       </Box>
+  //     </Modal>
+  //   )
+  // }
 
   return (
-    <ImageList
-      sx={{
-        gridAutoFlow: "column",
-        gridTemplateColumns: "repeat(auto-fit, minmax(160px,1fr)) !important",
-        gridAutoColumns: "minmax(160px, 1fr)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        margin: "0 auto",
-        paddingTop: "13px",
-        paddingBottom: "13px"
-      }}
-    >
-      <Grid container gap={2}>
-        {props.contenido.map((elem) => (
-          <Grid item key={elem.id}>
-            <ImageListItem
-              sx={{
-                width:"180px"
-              }}
-              key={elem.id}
-            >
-              <img
-                onClick={handleOpen}
-                src={
-                  elem.poster_path !== null
-                    ? props.apiImg + elem.poster_path
-                    : imgNull
-                }
-                alt={elem.title}
-                loading="lazy"
-                style={{ objectFit: "cover", borderRadius: "10px", cursor: "pointer" }}
-              />
-              {modal((elem.original_title || elem.original_name), elem.overview)}
-            </ImageListItem>
-          </Grid>
+    <Container maxWidth="lg" style={{  justifyContent: "center" }}>
+      <ImageList variant="standard" cols={5} gap={6} rowHeight={300}>
+        {contenido.map((item) => (
+          <ImageListItem key={item.id}>
+            <img
+              // onClick={handleOpen}
+              src={
+                item.poster_path !== null
+                  ? apiImg + item.poster_path
+                  : imgNull
+              }
+              alt={item.title}
+              loading="lazy"
+              style={{ cursor: "pointer", objectFit: "fill", borderRadius: 20, height: "inherit" }}
+            />
+            {/* {modal(item)} */}
+            <ImageListItemBar
+              title={item.media_type === "tv" ? item.name : item.title}
+              subtitle={`${item.vote_average}⭐`}
+              // actionIcon={
+              //   <IconButton
+              //     onClick={handleOpen}
+              //     sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+              //     aria-label={`info about ${item.media_type === "tv" ? item.name : item.title}`}
+              //   >
+              //     <InfoIcon />
+              //   </IconButton>
+              // }
+              sx={{borderRadius:"0 0 20px 20px"}}
+            />
+          </ImageListItem>
         ))}
-      </Grid>
-    </ImageList>
+      </ImageList>
+    </Container>
   );
 };
 
