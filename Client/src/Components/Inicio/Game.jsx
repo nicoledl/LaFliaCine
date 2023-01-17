@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from "@mui/material"
+import { Button, CircularProgress, Grid, Typography } from "@mui/material"
 import { useEffect } from "react"
 import { useState } from "react"
 import axios from "axios"
@@ -65,7 +65,7 @@ const Game = () => {
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6} style={{ display: "table-cell", verticalAlign: "middle", textAlign: "centers" }}>
                     {
-                        actors.length <= 0 ? <p>Cargando...</p> : <img id="img" alt={random} src={actors[random].img} style={styleImg} />
+                        actors.length <= 0 ? <CircularProgress color="secondary" /> : <img id="img" alt={random} src={actors[random].img} style={styleImg} />
                     }
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} style={{ display: "table-cell", verticalAlign: "middle", padding: 5 }}>
