@@ -61,8 +61,8 @@ const SliderTendencias = () => {
         swipe={true}
         sx={{ margin: 2, boxShadow: "-1px 1px 17px 8px rgba(0,0,0,1) inset" }}
       >
-        {array.map((content) => (
-          <MediaCard contenido={content} apiImg={API_IMG} />
+        {array.map((content, i) => (
+          <MediaCard key={i} contenido={content} apiImg={API_IMG} />
         ))}
       </Carousel>)
   }

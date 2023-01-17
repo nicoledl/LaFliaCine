@@ -13,6 +13,7 @@ const ImagenHeader = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 0 auto;
+  box-shadow: 0px 14px 50px -9px #000000;
 `;
 
 const Frases = styled.h1`

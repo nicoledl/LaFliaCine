@@ -1,0 +1,24 @@
+{
+    "actors":[
+        {"name": "Leonardo Dicaprio", "id":1, "img":"https://media.revistavanityfair.es/photos/60e83758e3e0ae04802dd2ce/master/w_2957,h_2444,c_limit/175086.jpg"},
+        {"name": "Brad Pitt", "id":2, "img":"https://cdn-3.expansion.mx/dims4/default/330a456/2147483647/strip/true/crop/1200x800+0+0/resize/1200x800!/format/webp/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F68%2Fae%2Faa4deb634c14aca8f259042d114d%2Fgettyimages-1175609994.jpg"},
+        {"name": "Robert Downey Jr", "id":3, "img":"https://cloudfront-us-east-1.images.arcpublishing.com/infobae/YN7L6YBSH5FUDJJQ5GWMO4OJ2Y.jpg"},
+        {"name": "Bruce Willis", "id":4, "img":"https://fotografias.antena3.com/clipping/cmsimages02/2022/04/04/69428CB1-5F28-4750-9021-173BC82E1118/bruce-willis_96.jpg?crop=1169,658,x0,y0&width=1200&height=675&optimize=low&format=webply"},
+        {"name": "Jhon Travolta", "id":5, "img":"https://www.lecturas.com/medio/2020/09/30/john-travolta_1adb7317_800x800.jpg"},
+        {"name": "Angelina Jolie", "id":6, "img":"https://phantom-marca.unidadeditorial.es/fc6e78d2f186e28a8ea6ffebd7df1a96/resize/1320/f/jpg/assets/multimedia/imagenes/2023/01/05/16729386127911.jpg"},
+        {"name": "Julia Roberts", "id":7, "img":"https://cnnespanol.cnn.com/wp-content/uploads/2023/01/230112114849-julia-roberts-file-111422.jpg?quality=100&strip=info"},
+        {"name": "Nicole Kidman", "id":8, "img":"https://images.ecestaticos.com/WBr9c_1ZfV2hz0P7dx0HF_OTWdc=/234x5:2241x1511/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F001%2Feb4%2F358%2F001eb435891e6e4229ce5dc6fe23fdac.jpg"},
+        {"name": "Emma Watson", "id":9, "img":"https://media.vogue.es/photos/5df7c84fc54b1f000872116c/master/pass/GettyImages-1187049386.jpg"},
+        {"name": "Anne Hathaway", "id":10, "img":"https://es.web.img2.acsta.net/pictures/19/10/16/01/22/0121805.jpg"},
+        {"name": "Natalie Portman", "id":11, "img":"https://media.revistagq.com/photos/5e4449e594b9d30008bf8e2e/16:9/w_2560%2Cc_limit/GettyImages-1205672025.jpg"},
+        {"name": "Megan Fox", "id":12, "img":"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/megan-fox-drogas-ayahuasca-experiencia-1626191416.jpg"},
+        {"name": "Emma Stone", "id":13, "img":"https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CE4MO4CWAVGR3OE76E7W4LYSOI.jpg"},
+        {"name": "Morgan Freeman", "id":14, "img":"https://www.latercera.com/resizer/-P5XYLsjnIyZr4MJdWBm8Qjgz64=/1200x630/smart/arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/FSL723D4M5A3ZAP7ROQXTIOIPY.jpg"},
+        {"name": "Tom Hanks", "id":15, "img":"https://images.hola.com/imagenes/actualidad/20220615211828/tom-hanks-temblor-mano/1-101-746/tom-hanks-getty2-t.jpg"},
+        {"name": "Will Smith", "id":16, "img":"https://people.com/thmb/j3cGZkKWC3ACyVW5cKlFQda9OPI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(1079x494:1081x496)/will-smith-2019-2000-00196a7c82a446e28e54adfcd5d21860.jpg"},
+        {"name": "Tom Cruise", "id":17, "img":"https://media.revistavanityfair.es/photos/60e82bd2af2c957f3efefd50/master/w_1600%2Cc_limit/246523.jpg"},
+        {"name": "Vin Diesel", "id":18, "img":"https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTgxMjQ5NDUyMjMxNjk3NzY4/gettyimages-492532708-copy.jpg"},
+        {"name": "Adam Sandler", "id":19, "img":"https://media.revistagq.com/photos/5e1d118bd656e500084a49cf/master/pass/GettyImages-499362656.jpg"},
+        {"name": "Kate Winslet", "id":20, "img":"https://images.ecestaticos.com/LAm9JmmZ14w_8AgzsMSm7lQ5QHM=/0x0:2272x1516/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F97f%2Fd96%2F7fc%2F97fd967fce3416c4f29246118e6be0a4.jpg"}
+    ]
+}

@@ -1,28 +1,29 @@
 import ImageListItem from "@mui/material/ImageListItem";
-import Modal from '@mui/material/Modal';
-import { Box } from "@mui/system";
-import { useState } from "react";
+// eslint-disable-next-line
 import { Container, ImageList, ImageListItemBar, Typography } from "@mui/material";
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
+//import { useState } from "react";
+// import Modal from '@mui/material/Modal';
+// import { Box } from "@mui/system";
+// import IconButton from '@mui/material/IconButton';
+// import InfoIcon from '@mui/icons-material/Info';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  height: "500px",
-  bgcolor: '#ddd',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+// const style = {
+//   position: 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   transform: 'translate(-50%, -50%)',
+//   width: 400,
+//   height: "500px",
+//   bgcolor: '#ddd',
+//   border: '2px solid #000',
+//   boxShadow: 24,
+//   p: 4,
+// };
 
 const MediaCard = ({ contenido, apiImg }) => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => setOpen(true);
+  // const handleClose = () => setOpen(false);
 
   const imgNull =
     "https://canalcocina.es/medias/publicuploads/2015/07/07/147549/846988273559c066aac7193.09884642.png";
@@ -67,7 +68,7 @@ const MediaCard = ({ contenido, apiImg }) => {
               }
               alt={item.title}
               loading="lazy"
-              style={{ cursor: "pointer", objectFit: "fill", borderRadius: 20, height: "inherit" }}
+              style={{ objectFit: "fill", borderRadius: 20, height: "inherit" }}
             />
             {/* {modal(item)} */}
             <ImageListItemBar
