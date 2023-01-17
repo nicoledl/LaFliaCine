@@ -1,3 +1,3 @@
 # LaFliaCine
 Preview:
-https://vercel.com/nicoledl/la-flia-cine
+https://la-flia-cine.vercel.app/
