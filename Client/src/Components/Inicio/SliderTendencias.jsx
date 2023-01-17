@@ -3,8 +3,14 @@ import axios from "axios";
 import { Container } from "@mui/system";
 import Carousel from "react-material-ui-carousel";
 import MediaCard from "./MediaCard";
-import "./home.css"
+import "./animationTitle.css"
+import styled from "@emotion/styled";
 
+const Titulo = styled.h1`
+  color:#F5EE9E;
+  font-family:  'Bebas Neue';
+  font-size: 
+`;
 
 const SliderTendencias = () => {
   const [movies, setMovies] = useState([]);
@@ -69,9 +75,9 @@ const SliderTendencias = () => {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 20 }}>
-      <h1 style={{ fontSize: "3em" }}>PELICULAS EN TENDENCIA</h1>
+      <Titulo style={{ fontSize: "3em" }}>PELICULAS EN TENDENCIA</Titulo>
       {carousel(movies)}
-      <h1 style={{ fontSize: "3em" }}>SERIES EN TENDENCIA</h1>
+      <Titulo style={{ fontSize: "3em" }}>SERIES EN TENDENCIA</Titulo>
       {carousel(series)}
     </Container>
   );

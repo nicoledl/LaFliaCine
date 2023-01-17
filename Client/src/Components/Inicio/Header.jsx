@@ -16,15 +16,44 @@ const ImagenHeader = styled.div`
   box-shadow: 0px 14px 50px -9px #000000;
 `;
 
-const Frases = styled.h1`
+const Titulo = styled.h1`
+text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #F5EE9E 0%,
+    #AB3428 29%,
+    #F49E4C 67%,
+    #F5EE9E 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  display: inline-block;
+  font-size: 80px;
+  text-align: center;
+  font-family: "Monoton", Helvetica, sans-serif;
+  letter-spacing: 5px;
+
+@keyframes textclip {
+to {
+background-position: 200% center;
+}
+}
+`
+
+const Frases = styled.div`
 font-size: clamp(2rem, 8vw - 2.5rem, 4rem);
 width: 80%;
 height: 100%;
 display: flex;
 justify-content: center;
 align-items: center;
-font-family: "Monoton", Helvetica, sans-serif;
-letter-spacing: 5px;
 `;
 
 const Header = () => {
@@ -55,12 +84,13 @@ const Header = () => {
           return (
             <ImagenHeader
               style={{
-                backgroundImage: `linear-gradient(0deg, rgba(171,52,40,1) 0%, rgba(171,52,40,0.7749300403755253) 52%, rgba(171,52,40,0.267927239255077) 89%), url(${imagenFondo})`,
+                backgroundImage: `linear-gradient(0deg, rgba(20,28,48,1) 10%, rgba(5,41,126,0.45840342973126746) 61%, rgba(255,255,255,0) 100%), url(${imagenFondo})`,
               }}
               key={elem.id}
             >
               <Frases>
-                <span className="header-title">Organizar tus gustos cinéfilos y seriales, nunca fue tan fácil</span>
+                <Titulo>Organizar tus gustos cinéfilos y seriales, nunca fue tan fácil</Titulo>
+                {/* <span className="animate-charcter">Organizar tus gustos cinéfilos y seriales, nunca fue tan fácil</span> */}
               </Frases>
             </ImagenHeader>
           );

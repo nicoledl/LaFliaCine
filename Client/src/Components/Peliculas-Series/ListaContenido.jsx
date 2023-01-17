@@ -30,19 +30,18 @@ const ListaContenido = (props) => {
   const API_BUSQUEDA = `https://api.themoviedb.org/3/search/${props.formato}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=es-MX&query=${input}&page=${page}&include_adult=false`;
 
   const API_IMG = `https://image.tmdb.org/t/p/original/`;
-  const imgNull =
-    "https://trek.scene7.com/is/image/TrekBicycleProducts/default-no-image?fmt=pjpeg&qlt=80,1&iccEmbed=0&cache=on,on";
+  const imgNull = "https://trek.scene7.com/is/image/TrekBicycleProducts/default-no-image?fmt=pjpeg&qlt=80,1&iccEmbed=0&cache=on,on";
 
   useEffect(() => {
     axios.get(API_POPULARES)
       .then(res => setPopulares(res.data.results))
-      // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [page]);
 
   useEffect(() => {
     axios.get(API_BUSQUEDA)
       .then(res => setBusqueda(res.data.results))
-      // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [input, page])
 
   const handleChange = (e) => {
@@ -61,7 +60,7 @@ const ListaContenido = (props) => {
     return (
       <Stack spacing={2}>
         <Pagination
-          count={Math.floor(api.length/20)}
+          count={Math.floor(api.length / 20)}
           page={page}
           onChange={handleChange}
         />
@@ -79,7 +78,7 @@ const ListaContenido = (props) => {
                 <MediaCard
                   key={elem.id}
                   titulo={elem.title || elem.name}
-                  lanzamiento={props.formato === "movie" ? elem.release_date : elem.first_air_date}
+                  lanzamiento={props.formato === "movie" ? elem.release_date.slice(0, 4) : elem.first_air_date.slice(0, 4)}
                   imagen={
                     elem.backdrop_path !== null
                       ? API_IMG + elem.backdrop_path
@@ -96,7 +95,7 @@ const ListaContenido = (props) => {
       </Box>
     );
   }
-console.log(input, API_BUSQUEDA)
+
   return (
     <>
       <Container sx={{ mt: 5, color: "white", fontFamily: "Fjalla One", bgcolor: "#fff", ml: 0, borderRadius: "0 30px 30px 0", height: "60px", width: "80vh", display: "table-cell", verticalAlign: "middle" }}>

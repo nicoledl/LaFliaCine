@@ -121,7 +121,17 @@ const Navbar = () => {
               textDecoration: "none",
             }}
           >
-            La Flia Cine
+            <Link href="/" sx={{
+              mr: 4,
+              display: { xs: "none", md: "flex" },
+              fontSize: "2em",
+              fontFamily: "'Ultra', serif",
+              letterSpacing: "2px",
+              color: "inherit",
+              textDecoration: "none",
+            }}>
+              La Flia Cine
+            </Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (

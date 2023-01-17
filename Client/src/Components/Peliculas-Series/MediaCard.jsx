@@ -32,15 +32,15 @@ const ImgContainer = styled.div`
   }
 `;
 
-const MediaCard = (props) => {
+const MediaCard = ({imagen, titulo, lanzamiento, detalle, id, formato}) => {
   return (
     <CardContainer>
       <ImgContainer>
         <CardMedia
           className="card-media"
           component="img"
-          image={props.imagen}
-          alt={props.titulo}
+          image={imagen}
+          alt={titulo}
           style={{ transition: "all .5s ease-in-out" }}
         />
       </ImgContainer>
@@ -49,22 +49,22 @@ const MediaCard = (props) => {
           sx={{ fontWeight: "600", fontSize:"clamp(1rem, 9.6vw - 4.4rem, 1.6rem)", lineHeight:"90%",
           fontFamily: "'Francois One', sans-serif" }}
         >
-          {props.titulo}
+          {titulo}
         </Typography>
         <Divider textAlign="right">
           <Typography
             sx={{ fontWeight: "600", fontStyle: "oblique" }}
           >
-            {props.lanzamiento.slice(0, 4)}
+            {lanzamiento.slice(0, 4)}
           </Typography>{" "}
         </Divider>
         <VentanaInfo
-          detalle={props.detalle}
-          titulo={props.titulo}
-          imagen={props.imagen}
-          id={props.id}
-          formato={props.formato}
-          lanzamiento={props.lanzamiento.slice(0, 4)}
+          detalle={detalle}
+          titulo={titulo}
+          imagen={imagen}
+          id={id}
+          formato={formato}
+          lanzamiento={lanzamiento.slice(0, 4)}
         />
       </CardContent>
       <Container style={{ position: "absolute", bottom: "0", padding: "0" }}>
