@@ -35,10 +35,11 @@ text-transform: uppercase;
   -webkit-text-fill-color: transparent;
   animation: textclip 2s linear infinite;
   display: inline-block;
-  font-size: 80px;
+  font-size: clamp(2rem, 10.7vw - 2.7rem, 4rem);
   text-align: center;
   font-family: "Monoton", Helvetica, sans-serif;
   letter-spacing: 5px;
+  font-weight: 200;
 
 @keyframes textclip {
 to {
@@ -49,7 +50,7 @@ background-position: 200% center;
 
 const Frases = styled.div`
 font-size: clamp(2rem, 8vw - 2.5rem, 4rem);
-width: 80%;
+width: 70%;
 height: 100%;
 display: flex;
 justify-content: center;
@@ -84,7 +85,7 @@ const Header = () => {
           return (
             <ImagenHeader
               style={{
-                backgroundImage: `linear-gradient(0deg, rgba(20,28,48,1) 10%, rgba(5,41,126,0.45840342973126746) 61%, rgba(255,255,255,0) 100%), url(${imagenFondo})`,
+                backgroundImage: `linear-gradient(0deg, rgba(17,19,22,1) 9%, rgba(18,21,26,0.8533614129245448) 56%, rgba(34,48,83,0.39117653897496496) 100%), url(${imagenFondo})`,
               }}
               key={elem.id}
             >

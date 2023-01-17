@@ -58,8 +58,9 @@ const ListaContenido = (props) => {
       setPage(value);
     };
     return (
-      <Stack spacing={2}>
+      <Stack spacing={2} style={{background:"#fff", borderRadius:"10px", padding:4}}>
         <Pagination
+          color="error"
           count={Math.floor(api.length / 20)}
           page={page}
           onChange={handleChange}
