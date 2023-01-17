@@ -8,18 +8,6 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import Container from "@mui/material/Container";
 import styled from "styled-components";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-const theme = createTheme({
-  palette: {
-    nocturno: {
-      main: "#fff",
-    },
-    brillante: {
-      main: "#000",
-    },
-  },
-});
 
 const PaginationContainer = styled.div`
   width: 100%;
@@ -46,41 +34,42 @@ const ListaContenido = (props) => {
     "https://trek.scene7.com/is/image/TrekBicycleProducts/default-no-image?fmt=pjpeg&qlt=80,1&iccEmbed=0&cache=on,on";
 
   useEffect(() => {
-    axios
-      .get(input.length > 0 ? API_BUSQUEDA : API_POPULARES)
-      .then((res) =>
-        input.length > 0
-          ? setBusqueda(res.data.results)
-          : setPopulares(res.data.results)
-      );
-    // eslint-disable-next-line
-  }, [input || page]);
+    axios.get(API_POPULARES)
+      .then(res => setPopulares(res.data.results))
+      // eslint-disable-next-line
+  }, [page]);
 
-  function handleChange(e) {
-    setInput(e.target.value);
-    setVisible(true);
+  useEffect(() => {
+    axios.get(API_BUSQUEDA)
+      .then(res => setBusqueda(res.data.results))
+      // eslint-disable-next-line
+  }, [input, page])
+
+  const handleChange = (e) => {
+    if (e.target.value === "" || e.target.value === undefined) {
+      setVisible(false)
+      return setInput("")
+    }
+    setInput(e.target.value)
+    setVisible(true)
   }
 
-  function paginationControlled(api) {
+  const paginationControlled = (api) => {
     const handleChange = (event, value) => {
       setPage(value);
     };
     return (
-      <ThemeProvider theme={theme}>
-        <Stack spacing={2}>
-          <Pagination
-            count={api.length}
-            page={page}
-            onChange={handleChange}
-            color="nocturno"
-            size="large"
-          />
-        </Stack>
-      </ThemeProvider>
+      <Stack spacing={2}>
+        <Pagination
+          count={Math.floor(api.length/20)}
+          page={page}
+          onChange={handleChange}
+        />
+      </Stack>
     );
   }
 
-  function contenido(array) {
+  const contenido = (array) => {
     return (
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={4} columns={{ xs: 4, sm: 8, md: 12, lg: 12 }}>
@@ -107,11 +96,11 @@ const ListaContenido = (props) => {
       </Box>
     );
   }
-
+console.log(input, API_BUSQUEDA)
   return (
     <>
       <Container sx={{ mt: 5, color: "white", fontFamily: "Fjalla One", bgcolor: "#fff", ml: 0, borderRadius: "0 30px 30px 0", height: "60px", width: "80vh", display: "table-cell", verticalAlign: "middle" }}>
-        <input type="text" placeholder="BÚSQUEDA" name="name" onChange={handleChange} size="5" style={{ border: "none", float: "right", height: "25px", width: "50%", fontSize: "1em" }} />
+        <input type="text" placeholder="BÚSQUEDA" value={input} onChange={handleChange} size="5" style={{ border: "none", float: "right", height: "25px", width: "50%", fontSize: "1em", outline: "none" }} />
       </Container>
       <Container maxWidth="xl" style={{ marginTop: "80px" }}>
         {visible ? contenido(busqueda) : contenido(populares)}

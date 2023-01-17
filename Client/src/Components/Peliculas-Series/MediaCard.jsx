@@ -53,7 +53,6 @@ const MediaCard = (props) => {
         </Typography>
         <Divider textAlign="right">
           <Typography
-            component="body1"
             sx={{ fontWeight: "600", fontStyle: "oblique" }}
           >
             {props.lanzamiento.slice(0, 4)}
