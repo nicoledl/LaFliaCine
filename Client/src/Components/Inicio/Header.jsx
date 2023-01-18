@@ -62,12 +62,15 @@ const Header = () => {
 
   const API_LASTEST_MOVIES = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=es-MX&page=1`;
   const API_IMG = `https://image.tmdb.org/t/p/original/`;
+  const imgNull =
+    "https://canalcocina.es/medias/publicuploads/2015/07/07/147549/846988273559c066aac7193.09884642.png";
 
   useEffect(() => {
     axios
       .get(API_LASTEST_MOVIES)
       .then((res) => res.data.results)
-      .then((res) => setUltimasPeliculas(res.splice(0, 4)));
+      .then((res) => setUltimasPeliculas(res.splice(0, 4)))
+      .catch(() => console.error("Not Found"))
     // eslint-disable-next-line
   }, []);
 
@@ -81,7 +84,10 @@ const Header = () => {
         indicators={false}
       >
         {ultimasPeliculas.map((elem) => {
-          const imagenFondo = `${API_IMG}${elem.backdrop_path}`;
+          let imagenFondo = `${API_IMG}${elem.backdrop_path}`;
+          if (imagenFondo === undefined || imagenFondo === "") {
+            imagenFondo = imgNull
+          }
           return (
             <ImagenHeader
               style={{

@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Gochi+Hand');
+
+.not-found {
+    font-size: clamp(2rem, 16vw - 5rem, 5rem);
+    color: #fff;
+    line-height: 1.5;
+    display: inline;
+    background-image: linear-gradient(transparent 50%,
+            #F49E4C 50%,
+            #AB3428 85%,
+            transparent 85%,
+            transparent 100%);
+    background-repeat: no-repeat;
+    font-family: 'Gochi Hand', cursive;
+    background-size: 0% 100%;
+    animation: animatedBackground 2s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s forwards;
+}
+
+@keyframes animatedBackground {
+    to {
+        padding-top:10px;
+        background-size: 100% 100%;
+    }
+}

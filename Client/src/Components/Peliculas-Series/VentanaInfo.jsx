@@ -58,23 +58,28 @@ const VentanaInfo = ({ id, formato }) => {
   const urlData = `https://api.themoviedb.org/3/${formato}/${id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=es-MX`
   const API_VIDEO_EN = `https://api.themoviedb.org/3/${formato}/${id}/videos?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`;
   const VIDEO_YOUTUBE = `https://www.youtube.com/watch?v=${video}`;
-  const API_IMG = `https://image.tmdb.org/t/p/original/`;
+  let API_IMG = `https://image.tmdb.org/t/p/original/`;
+  const imgNull =
+    "https://canalcocina.es/medias/publicuploads/2015/07/07/147549/846988273559c066aac7193.09884642.png";
 
   useEffect(() => {
     if (open) {
-      axios.get(API_VIDEO_EN).then(res => setVideo(res.data.results[0].key));
+      axios.get(API_VIDEO_EN)
+      .then(res => setVideo(res.data.results[0].key))
+      .catch(() => console.error("Not Found"))
     }
     // eslint-disable-next-line
   }, [open]);
 
   useEffect(() => {
-    axios.get(urlData).then(res => setData(res.data))
+    axios.get(urlData)
+    .then(res => setData(res.data))
+    .catch(() => console.error("Not Found"))
     // eslint-disable-next-line
   }, [])
 
-
   if (loading) {
-    setTimeout(() => { setLoading(false) }, 2000)
+    setTimeout(() => { setLoading(false) }, 1000)
     return (
       <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
         <LinearProgress color="warning" />
@@ -83,8 +88,14 @@ const VentanaInfo = ({ id, formato }) => {
       </Stack>
     )
   } else {
+    const releaseDate = formato === "movie" ? new Date(data.release_date) : new Date(data.first_air_date)
+    const year = releaseDate.getFullYear()
     const limiteTexto = data.overview.slice(0, 160);
-    
+
+    if (data.backdrop_path === undefined) {
+      API_IMG = imgNull
+    }
+
     const ImgFondo = {
       position: "absolute",
       width: "100%",
@@ -98,7 +109,6 @@ const VentanaInfo = ({ id, formato }) => {
       backgroundPosition: "0 30%",
     };
 
-    console.log(data)
     return (
       <div>
         <InfoContainer onClick={handleOpen}>
@@ -106,7 +116,10 @@ const VentanaInfo = ({ id, formato }) => {
             align="left"
             sx={{ fontSize: "clamp(0.8rem, 0vw + 0.8rem, 0.80rem)", fontFamily: "'M PLUS Rounded 1c', sans-serif", fontWeight: "700" }}
           >
-            {data.overview.length < 160 ? limiteTexto : limiteTexto + "..."}
+            {/* {data.overview.length < 160 ? limiteTexto : limiteTexto + "..."} */}
+            {
+              data.overview !== undefined && data.overview.length < 160 ? limiteTexto : limiteTexto + "..."
+            }
             <InfoIcon
               fontSize="small"
               sx={{ color: grey[900], padding: "0", margin: "0 auto" }}
@@ -139,7 +152,7 @@ const VentanaInfo = ({ id, formato }) => {
                       fontSize: "0.5em",
                     }}
                   >
-                    {formato === "movie" ? data.release_date.slice(0, 4) : data.first_air_date.slice(0, 4)}
+                    {year}
                   </p>
                 </Typography>
                 <Typography

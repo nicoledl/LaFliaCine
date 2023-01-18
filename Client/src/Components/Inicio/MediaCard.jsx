@@ -20,13 +20,13 @@ import { Container, ImageList, ImageListItemBar, Typography } from "@mui/materia
 //   p: 4,
 // };
 
-const MediaCard = ({ contenido, apiImg }) => {
+const MediaCard = ({ contenido }) => {
   // const [open, setOpen] = useState(false);
   // const handleOpen = () => setOpen(true);
   // const handleClose = () => setOpen(false);
 
-  const imgNull =
-    "https://canalcocina.es/medias/publicuploads/2015/07/07/147549/846988273559c066aac7193.09884642.png";
+
+  const imgNull = "https://canalcocina.es/medias/publicuploads/2015/07/07/147549/846988273559c066aac7193.09884642.png";
 
 
   // function modal(data) {
@@ -55,38 +55,42 @@ const MediaCard = ({ contenido, apiImg }) => {
   // }
 
   return (
-    <Container maxWidth="lg" style={{  justifyContent: "center" }}>
+    <Container maxWidth="lg" style={{ justifyContent: "center" }}>
       <ImageList variant="standard" cols={5} gap={6} rowHeight={300}>
-        {contenido.map((item) => (
-          <ImageListItem key={item.id}>
-            <img
-              // onClick={handleOpen}
-              src={
-                item.poster_path !== null
-                  ? apiImg + item.poster_path
-                  : imgNull
-              }
-              alt={item.title}
-              loading="lazy"
-              style={{ objectFit: "fill", borderRadius: 20, height: "inherit" }}
-            />
-            {/* {modal(item)} */}
-            <ImageListItemBar
-              title={item.media_type === "tv" ? item.name : item.title}
-              subtitle={`${item.vote_average}⭐`}
-              // actionIcon={
-              //   <IconButton
-              //     onClick={handleOpen}
-              //     sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-              //     aria-label={`info about ${item.media_type === "tv" ? item.name : item.title}`}
-              //   >
-              //     <InfoIcon />
-              //   </IconButton>
-              // }
-              sx={{borderRadius:"0 0 20px 20px"}}
-            />
-          </ImageListItem>
-        ))}
+        {contenido.map((elem) => {
+          const img = `https://image.tmdb.org/t/p/original/` + elem.poster_path;
+
+          return (
+            <ImageListItem key={elem.id}>
+              <img
+                // onClick={handleOpen}
+                src={
+                  elem.poster_path !== null
+                    ? img
+                    : imgNull
+                }
+                alt={elem.title}
+                loading="lazy"
+                style={{ objectFit: "fill", borderRadius: 20, height: "inherit" }}
+              />
+              {/* {modal(elem)} */}
+              <ImageListItemBar
+                title={elem.media_type === "tv" ? elem.name : elem.title}
+                subtitle={`${elem.vote_average}⭐`}
+                // actionIcon={
+                //   <IconButton
+                //     onClick={handleOpen}
+                //     sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                //     aria-label={`info about ${elem.media_type === "tv" ? elem.name : elem.title}`}
+                //   >
+                //     <InfoIcon />
+                //   </IconButton>
+                // }
+                sx={{ borderRadius: "0 0 20px 20px" }}
+              />
+            </ImageListItem>)
+        }
+        )}
       </ImageList>
     </Container>
   );

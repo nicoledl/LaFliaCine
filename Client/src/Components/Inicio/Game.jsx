@@ -55,7 +55,6 @@ const Game = () => {
 
         return setIncorrect(true)
     }
- console.log(random)
     return (
         <Container style={{ marginTop: "10%", marginBottom: "10%" }}>
             <div style={{ marginTop: "5%", marginBottom: "5%", height: "50px" }}>

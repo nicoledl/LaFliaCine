@@ -6,6 +6,8 @@ import VentanaInfo from "./VentanaInfo";
 import BotonesActivos from "../common/BotonesActivos";
 import { Container } from "@mui/system";
 import { Divider } from "@mui/material";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const CardContainer = styled.div`
   position: relative;
@@ -32,39 +34,54 @@ const ImgContainer = styled.div`
   }
 `;
 
-const MediaCard = ({imagen, titulo, lanzamiento, detalle, id, formato}) => {
+const MediaCard = ({ id, formato }) => {
+  const [data, setData] = useState([])
+
+  const urlData = `https://api.themoviedb.org/3/${formato}/${id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=es-MX`
+  const API_IMG = `https://image.tmdb.org/t/p/original/`;
+  const imgNull =
+    "https://canalcocina.es/medias/publicuploads/2015/07/07/147549/846988273559c066aac7193.09884642.png";
+
+  const releaseDate = formato === "movie" ? new Date(data.release_date) : new Date(data.first_air_date)
+  const year = releaseDate.getFullYear()
+
+  useEffect(() => {
+    axios.get(urlData)
+      .then(res => setData(res.data))
+      .catch(() => console.error("Not Found"))
+    // eslint-disable-next-line
+  }, [])
+
   return (
     <CardContainer>
       <ImgContainer>
         <CardMedia
           className="card-media"
           component="img"
-          image={imagen}
-          alt={titulo}
+          image={data.backdrop_path === null ? imgNull : API_IMG + data.backdrop_path}
+          alt={data.title === undefined ? data.name : data.title}
           style={{ transition: "all .5s ease-in-out" }}
         />
       </ImgContainer>
       <CardContent>
         <Typography
-          sx={{ fontWeight: "600", fontSize:"clamp(1rem, 9.6vw - 4.4rem, 1.6rem)", lineHeight:"90%",
-          fontFamily: "'Francois One', sans-serif" }}
+          sx={{
+            fontWeight: "600", fontSize: "clamp(1rem, 9.6vw - 4.4rem, 1.6rem)", lineHeight: "90%",
+            fontFamily: "'Francois One', sans-serif"
+          }}
         >
-          {titulo}
+          {data.title === undefined ? data.name : data.title}
         </Typography>
         <Divider textAlign="right">
           <Typography
             sx={{ fontWeight: "600", fontStyle: "oblique" }}
           >
-            {lanzamiento.slice(0, 4)}
-          </Typography>{" "}
+            {isNaN(year) ? "" : year}
+          </Typography>
         </Divider>
         <VentanaInfo
-          detalle={detalle}
-          titulo={titulo}
-          imagen={imagen}
           id={id}
           formato={formato}
-          lanzamiento={lanzamiento.slice(0, 4)}
         />
       </CardContent>
       <Container style={{ position: "absolute", bottom: "0", padding: "0" }}>
