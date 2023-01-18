@@ -95,7 +95,7 @@ const Navbar = () => {
                   <Link
                     key={page.href}
                     href={`/${page.href}`}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none", color: "black" }}
                   >
                     <Typography textAlign="center" sx={{ fontFamily: "'M PLUS Rounded 1c', sans-serif" }}>{page.name}</Typography>
                   </Link>
@@ -121,15 +121,9 @@ const Navbar = () => {
               textDecoration: "none",
             }}
           >
-            <Link href="/" sx={{
-              mr: 4,
-              display: { xs: "none", md: "flex" },
-              fontSize: "2em",
-              fontFamily: "'Ultra', serif",
-              letterSpacing: "2px",
-              color: "inherit",
-              textDecoration: "none",
-            }}>
+            <Link href="/"
+              style={{ textDecoration: "none", color: "#fff" }}
+            >
               La Flia Cine
             </Link>
           </Typography>

@@ -10,7 +10,7 @@ import Checkboxes from './Checkboxes'
 const Form = () => {
 
   return (
-    <Container component="main" maxWidth="md" sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <Container component="main" maxWidth="md" sx={{ display: "flex", alignItems: "center", justifyContent: "center", marginBottom:"20px"}}>
       <Box sx={{ pt:2, pb:2, pl:4, pr:4, background: "#fff", borderRadius: "50px", width: "inherit", height: "auto", mt: 3, "gap": 5 }} >
         <Container component="div" maxWidth="md" sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
           <Avatar sx={{ m: 2, bgcolor: "#AB3428" }}>

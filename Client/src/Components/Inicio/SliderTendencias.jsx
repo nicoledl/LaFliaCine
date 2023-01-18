@@ -4,13 +4,7 @@ import { Container } from "@mui/system";
 import Carousel from "react-material-ui-carousel";
 import MediaCard from "./MediaCard";
 import "./animationTitle.css"
-import styled from "@emotion/styled";
-
-const Titulo = styled.h1`
-  color:#F5EE9E;
-  font-family:  'Bebas Neue';
-  font-size: 
-`;
+import { MotionTitle } from "../common/ScrollAnimations";
 
 const SliderTendencias = () => {
   const [movies, setMovies] = useState([]);
@@ -76,10 +70,10 @@ const SliderTendencias = () => {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 20 }}>
-      <Titulo style={{ fontSize: "3em" }}>PELICULAS EN TENDENCIA</Titulo>
+    <Container maxWidth="lg" >
+      <MotionTitle text="PELICULAS EN TENDENCIA" />
       {carousel(movies)}
-      <Titulo style={{ fontSize: "3em" }}>SERIES EN TENDENCIA</Titulo>
+      <MotionTitle text="SERIES EN TENDENCIA" />
       {carousel(series)}
     </Container>
   );
