@@ -21,21 +21,12 @@ const itemVariant = {
 };
 
 const Game = () => {
-    //onst [actors, setActors] = useState(actorsDB.actors)
     const [value, setValue] = useState("")
     const [random, setRandom] = useState(0)
     const [correct, setCorrect] = useState(false)
     const [incorrect, setIncorrect] = useState(false)
     const control = useAnimation();
     const [ref, inView] = useInView();
-
-    // useEffect(() => {
-    //     axios.get("http://localhost:3001/actors")
-    //         .then(res => {
-    //             setActors(res.data)
-    //             setRandom(Math.floor(Math.random() * res.data.length))
-    //         })
-    // }, [])
 
     useEffect(() => {
         setRandom(Math.floor(Math.random() * actorsDB.actors.length))
