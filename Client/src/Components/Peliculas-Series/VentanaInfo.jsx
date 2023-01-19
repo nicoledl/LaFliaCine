@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-//import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Typography from "@mui/material/Typography";
@@ -60,8 +59,7 @@ const VentanaInfo = ({ id, formato }) => {
   const API_VIDEO_EN = `https://api.themoviedb.org/3/${formato}/${id}/videos?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`;
   const VIDEO_YOUTUBE = `https://www.youtube.com/watch?v=${video}`;
   let API_IMG = `https://image.tmdb.org/t/p/original/`;
-  const imgNull =
-    "https://canalcocina.es/medias/publicuploads/2015/07/07/147549/846988273559c066aac7193.09884642.png";
+  const imgNull = "https://canalcocina.es/medias/publicuploads/2015/07/07/147549/846988273559c066aac7193.09884642.png";
 
   useEffect(() => {
     if (open) {
@@ -97,17 +95,14 @@ const VentanaInfo = ({ id, formato }) => {
     const releaseDate = formato === "movie" ? new Date(data.release_date) : new Date(data.first_air_date)
     const year = releaseDate.getFullYear()
     const limiteTexto = data.overview.slice(0, 160);
-
-    if (data.backdrop_path === undefined) {
-      API_IMG = imgNull
-    }
+    const conditionImg = data.backdrop_path === undefined || data.backdrop_path === null ? imgNull : API_IMG + data.backdrop_path
 
     const ImgFondo = {
       left: 0,
       top: 0,
       position: "absolute",
       width: "100%",
-      backgroundImage: `linear-gradient(180deg,rgba(244,158,76,0) 80%,  rgba(244,158,76,0.90) 100%), url(${API_IMG + data.backdrop_path})`,
+      backgroundImage: `linear-gradient(180deg,rgba(244,158,76,0) 80%,  rgba(244,158,76,0.90) 100%), url(${conditionImg})`,
       backgroundSize: "100%",
       backgroundRepeat: "no-repeat",
       height: "300px",
@@ -151,7 +146,7 @@ const VentanaInfo = ({ id, formato }) => {
               <Container sx={StyleInsideBox}>
                 <div style={ImgFondo} ></div>
                 <Typography id="transition-modal-title" variant="h2" sx={{ fontFamily: "'Francois One', sans-serif" }}>
-                  <p style={{ margin: "0", fontSize: "clamp(2rem, 7.5vw - 1.3rem, 3.4rem)" }}>{data.title}</p>
+                  <p style={{ margin: "0", fontSize: "clamp(2rem, 7.5vw - 1.3rem, 3.4rem)" }}>{data.title === undefined ? data.name : data.title}</p>
                   <p style={{ margin: "0", fontSize: "0.5em", }}>
                     <Divider textAlign="left">{year}</Divider>
                   </p>
@@ -172,12 +167,11 @@ const VentanaInfo = ({ id, formato }) => {
                     /></Container>
                   <Container maxWidth="md">
                     <Divider textAlign="left"><h3>CASTING</h3></Divider>
-                    <ImageList cols={8} gap="8px" sx={{ textAlign: "center", alignItems: "center", display: "flex", padding: "auto" }}>
+                    <ImageList cols={8} gap={8} sx={{ textAlign: "center", alignItems: "center", display: "flex", padding: "auto" }}>
                       {
                         credits.map((person, i) => {
-                          //{person.name} as {person.character}
                           return (
-                            <img size="lg" alt={person.id} src={API_IMG + person.profile_path} style={{ height: "80px", width: "80px", objectFit: "cover", borderRadius: "50%" }} />
+                            <img key={i} size="lg" alt={person.name} src={API_IMG + person.profile_path} style={{ height: "80px", width: "80px", objectFit: "cover", borderRadius: "50%" }} />
                           )
                         })
                       }

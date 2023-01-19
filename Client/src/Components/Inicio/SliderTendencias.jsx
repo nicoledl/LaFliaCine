@@ -107,7 +107,6 @@ const SliderTendencias = () => {
             {array.map((content, i) => {
               const copyArray = [...content]
               const xsArray = copyArray.splice(0, 2)
-              console.log(xsArray)
               return (
                 <MediaCard key={i} contenido={xsArray} />
               )

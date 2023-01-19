@@ -88,9 +88,7 @@ const ListaContenido = ({ formato }) => {
                   titulo={elem.title === undefined ? elem.name : elem.title}
                   lanzamiento={releaseDate(elem).getFullYear()}
                   imagen={
-                    elem.backdrop_path !== null
-                      ? API_IMG + elem.backdrop_path
-                      : imgNull
+                    elem.backdrop_path === undefined || elem.backdrop_path === null ? imgNull : API_IMG + elem.backdrop_path
                   }
                   detalle={elem.overview || "Sin descripción..."}
                   id={elem.id}

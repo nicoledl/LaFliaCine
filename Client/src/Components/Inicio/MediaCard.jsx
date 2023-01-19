@@ -16,9 +16,7 @@ const MediaCard = ({ contenido }) => {
               <ImageListItem key={elem.id}>
                 <img
                   src={
-                    elem.poster_path !== null
-                      ? img
-                      : imgNull
+                    elem.poster_path === undefined ? imgNull : img
                   }
                   alt={elem.title}
                   loading="lazy"
@@ -44,9 +42,7 @@ const MediaCard = ({ contenido }) => {
               <ImageListItem key={elem.id}>
                 <img
                   src={
-                    elem.poster_path !== null
-                      ? img
-                      : imgNull
+                    elem.poster_path === undefined ? imgNull : img
                   }
                   alt={elem.title}
                   loading="lazy"
@@ -72,9 +68,7 @@ const MediaCard = ({ contenido }) => {
               <ImageListItem key={elem.id}>
                 <img
                   src={
-                    elem.poster_path !== null
-                      ? img
-                      : imgNull
+                    elem.poster_path === undefined ? imgNull : img
                   }
                   alt={elem.title}
                   loading="lazy"

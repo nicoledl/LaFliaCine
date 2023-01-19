@@ -1,4 +1,3 @@
-import Copyright from "../Components/common/Copyright";
 import Navbar from "../Components/Navbar/Navbar";
 import ListaContenido from "../Components/Peliculas-Series/ListaContenido";
 
@@ -7,7 +6,6 @@ const Peliculas = () => {
     <>
       <Navbar />
       <ListaContenido formato="movie" />
-      <Copyright color="#fff" />
     </>
   );
 };

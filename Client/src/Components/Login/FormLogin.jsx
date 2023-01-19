@@ -127,7 +127,7 @@ const FormLogin = () => {
                   fullWidth
                   type="submit"
                   size="medium"
-                  sx={{ mt: 5, mb: 8,}}
+                  sx={{ mt: 5, mb: 8, }}
                 >
                   <Typography variant="h5" sx={{ color: "#ddd", fontWeight: "700", fontFamily: "'Fjalla One', sans-serif" }}>
                     Ingresar

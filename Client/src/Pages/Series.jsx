@@ -5,7 +5,7 @@ const Series = () => {
   return (
     <>
       <Navbar />
-      <ListaContenido formato="tv"/>
+      <ListaContenido formato="tv" />
     </>
   );
 };

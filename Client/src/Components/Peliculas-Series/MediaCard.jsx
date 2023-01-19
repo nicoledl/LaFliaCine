@@ -58,7 +58,7 @@ const MediaCard = ({ id, formato }) => {
         <CardMedia
           className="card-media"
           component="img"
-          image={data.backdrop_path === null ? imgNull : API_IMG + data.backdrop_path}
+          image={data.backdrop_path === undefined || data.backdrop_path === null ? imgNull : API_IMG + data.backdrop_path}
           alt={data.title === undefined ? data.name : data.title}
           style={{ transition: "all .5s ease-in-out" }}
         />
