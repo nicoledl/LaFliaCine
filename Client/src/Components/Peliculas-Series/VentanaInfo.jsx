@@ -38,6 +38,7 @@ const StyleBox = {
   padding: "0",
   margin: "0 auto",
   marginTop: "1%",
+  fontFamily: "'Francois One', sans-serif",
 };
 
 const StyleInsideBox = {
@@ -94,7 +95,6 @@ const VentanaInfo = ({ id, formato }) => {
   } else {
     const releaseDate = formato === "movie" ? new Date(data.release_date) : new Date(data.first_air_date)
     const year = releaseDate.getFullYear()
-    const limiteTexto = data.overview.slice(0, 160);
     const conditionImg = data.backdrop_path === undefined || data.backdrop_path === null ? imgNull : API_IMG + data.backdrop_path
 
     const ImgFondo = {
@@ -121,7 +121,7 @@ const VentanaInfo = ({ id, formato }) => {
             align="left"
             sx={{ fontSize: "clamp(0.8rem, 0vw + 0.8rem, 0.80rem)", fontFamily: "'M PLUS Rounded 1c', sans-serif", fontWeight: "700" }}
           >
-            {data.overview !== undefined && data.overview.length < 160 ? limiteTexto : limiteTexto + "..."}
+            {data.overview === undefined || data.overview === null ? "Sín sinópsis" : data.overview.length < 156 ? data.overview : data.overview.slice(0, 156) + "..."}
             <InfoIcon
               fontSize="small"
               sx={{ color: grey[900], padding: "0", margin: "0 auto" }}
@@ -145,17 +145,13 @@ const VentanaInfo = ({ id, formato }) => {
               </Container >
               <Container sx={StyleInsideBox}>
                 <div style={ImgFondo} ></div>
-                <Typography id="transition-modal-title" variant="h2" sx={{ fontFamily: "'Francois One', sans-serif" }}>
-                  <p style={{ margin: "0", fontSize: "clamp(2rem, 7.5vw - 1.3rem, 3.4rem)" }}>{data.title === undefined ? data.name : data.title}</p>
-                  <p style={{ margin: "0", fontSize: "0.5em", }}>
-                    <Divider textAlign="left">{year}</Divider>
-                  </p>
-                </Typography>
+                <p style={{ margin: "0", fontSize: "clamp(2rem, 7.5vw - 1.3rem, 3.4rem)" }}>{data.title === undefined ? data.name : data.title}</p>
+                <Divider textAlign="left">{year}</Divider>
                 <Typography
                   id="transition-modal-description"
                   sx={{ mt: 2, fontSize: "1em", fontFamily: "'M PLUS Rounded 1c', sans-serif", fontWeight: "400", height: "auto", paddingBottom: "20px" }}
                 >
-                  Sinopsis: {data.overview}
+                  Sinopsis: {data.overview === undefined || data.overview === null ? "Sin descripción" : data.overview}
                   <Container maxWidth="md">
                     <ReactPlayer
                       playing={true}
@@ -165,25 +161,25 @@ const VentanaInfo = ({ id, formato }) => {
                       url={VIDEO_YOUTUBE}
                       style={{ height: "auto", marginTop: 10 }}
                     /></Container>
-                  <Container maxWidth="md">
-                    <Divider textAlign="left"><h3>CASTING</h3></Divider>
-                    <ImageList cols={8} gap={8} sx={{ textAlign: "center", alignItems: "center", display: "flex", padding: "auto" }}>
-                      {
-                        credits.map((person, i) => {
-                          return (
-                            <img key={i} size="lg" alt={person.name} src={API_IMG + person.profile_path} style={{ height: "80px", width: "80px", objectFit: "cover", borderRadius: "50%" }} />
-                          )
-                        })
-                      }
-                    </ImageList>
-                  </Container>
                 </Typography>
+                <Container maxWidth="md">
+                  <Divider textAlign="left"><h3>CASTING</h3></Divider>
+                  <ImageList cols={8} gap={8} sx={{ textAlign: "center", alignItems: "center", display: "flex", padding: "auto" }}>
+                    {
+                      credits.map((person, i) => {
+                        return (
+                          <img key={i} size="lg" alt={person.name} src={API_IMG + person.profile_path} style={{ height: "80px", width: "80px", objectFit: "cover", borderRadius: "50%" }} />
+                        )
+                      })
+                    }
+                  </ImageList>
+                </Container>
                 <BotonesActivos />
               </Container>
             </Container>
           </Fade>
         </Modal>
-      </div>
+      </div >
     );
   }
 };

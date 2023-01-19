@@ -12,7 +12,7 @@ import "./animationTitle.css";
 
 const PaginationContainer = styled.div`
   width: 100%;
-  height: 140px;
+  height: 5vh;
   margin: 6px;
   display: flex;
   align-items: center;
@@ -42,13 +42,25 @@ const ListaContenido = ({ formato }) => {
 
   useEffect(() => {
     if (input === undefined || input === "") {
-      return
+      return console.error("Not Found")
     }
     axios.get(API_BUSQUEDA)
-      .then(res => setBusqueda(res.data.results))
+      .then(res => {
+        setBusqueda(res.data.results)
+        setPage(1)
+      })
       .catch(() => console.error("Not Found"))
     // eslint-disable-next-line
-  }, [input, page])
+  }, [input])
+
+  useEffect(() => {
+    axios.get(API_BUSQUEDA)
+      .then(res => {
+        setBusqueda(res.data.results)
+      })
+      .catch(() => console.error("Not Found"))
+    // eslint-disable-next-line
+  }, [page])
 
   const handleChange = (e) => {
     if (e.target.value === "" || e.target.value === undefined) {
@@ -64,7 +76,7 @@ const ListaContenido = ({ formato }) => {
       setPage(value);
     };
     return (
-      <Stack spacing={2} style={{ background: "#fff", borderRadius: "10px", padding: 4 }}>
+      <Stack spacing={2} style={{ background: "#fff", borderRadius: "10px", padding: 5, marginTop: "40px" }}>
         <Pagination
           color="error"
           count={Math.floor(api.length / 20)}
@@ -73,6 +85,19 @@ const ListaContenido = ({ formato }) => {
         />
       </Stack>
     );
+  }
+
+  const controller = () => {
+    return (
+      visible ? (
+        <PaginationContainer>
+          {busqueda.length === 0 ? <div style={{ marginTop: "20%" }} ><h1 className="not-found">No hay resultados...</h1></div> : paginationControlled(API_BUSQUEDA)}
+        </PaginationContainer>
+      ) : (
+        <PaginationContainer>
+          {paginationControlled(API_POPULARES)}
+        </PaginationContainer>
+      ))
   }
 
   const contenido = (array) => {
@@ -90,7 +115,7 @@ const ListaContenido = ({ formato }) => {
                   imagen={
                     elem.backdrop_path === undefined || elem.backdrop_path === null ? imgNull : API_IMG + elem.backdrop_path
                   }
-                  detalle={elem.overview || "Sin descripción..."}
+                  detalle={elem.overview === undefined || elem.overview === null ? "Sin descripción..." : elem.overview}
                   id={elem.id}
                   formato={formato}
                 />
@@ -109,15 +134,7 @@ const ListaContenido = ({ formato }) => {
       </Container>
       <Container maxWidth="xl" style={{ marginTop: "80px" }}>
         {visible ? contenido(busqueda) : contenido(populares)}
-        {visible ? (
-          <PaginationContainer>
-            {busqueda.length === 0 ? <div style={{ marginTop: "20%" }} ><h1 className="not-found">No hay resultados...</h1></div> : paginationControlled(API_BUSQUEDA)}
-          </PaginationContainer>
-        ) : (
-          <PaginationContainer>
-            {paginationControlled(API_POPULARES)}
-          </PaginationContainer>
-        )}
+        {controller()}
       </Container>
     </>
   );
