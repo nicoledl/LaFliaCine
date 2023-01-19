@@ -80,7 +80,7 @@ const ListaContenido = ({ formato }) => {
     return (
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={4} columns={{ xs: 4, sm: 8, md: 12, lg: 12 }}>
-          {array?.map((elem,i) => {
+          {array?.map((elem, i) => {
             return (
               <Grid item xs={12} sm={4} md={4} lg={3} key={elem.id}>
                 <MediaCard
@@ -106,21 +106,21 @@ const ListaContenido = ({ formato }) => {
 
   return (
     <>
-      <Container sx={{ mt: 5, color: "white", fontFamily: "Fjalla One", bgcolor: "#fff", ml: 0, borderRadius: "0 30px 30px 0", height: "60px", width: "80vh", display: "table-cell", verticalAlign: "middle" }}>
-        <input type="text" placeholder="BÚSQUEDA" value={input} onChange={handleChange} size="5" style={{ border: "none", float: "right", height: "25px", width: "50%", fontSize: "1em", outline: "none" }} />
+      <Container sx={{ mt: 5, color: "white", fontFamily: "Fjalla One", bgcolor: "#fff", ml: 0, borderRadius: "0 30px 30px 0", height: "60px", width: { md: "70vh", sm: "50vh", xs: "30vh" }, display: "table-cell", verticalAlign: "middle" }}>
+        <input type="text" placeholder="🔎 BÚSQUEDA" value={input} onChange={handleChange} size="5" style={{ border: "none", float: "right", height: "25px", width: "50%", fontSize: "1em", outline: "none" }} />
       </Container>
       <Container maxWidth="xl" style={{ marginTop: "80px" }}>
         {visible ? contenido(busqueda) : contenido(populares)}
         {visible ? (
           <PaginationContainer>
-            {busqueda.length === 0 ? <div style={{marginTop:"20%"}} ><h1 className="not-found">No hay resultados...</h1></div> : paginationControlled(API_BUSQUEDA)}
-      </PaginationContainer>
-      ) : (
-      <PaginationContainer>
-        {paginationControlled(API_POPULARES)}
-      </PaginationContainer>
+            {busqueda.length === 0 ? <div style={{ marginTop: "20%" }} ><h1 className="not-found">No hay resultados...</h1></div> : paginationControlled(API_BUSQUEDA)}
+          </PaginationContainer>
+        ) : (
+          <PaginationContainer>
+            {paginationControlled(API_POPULARES)}
+          </PaginationContainer>
         )}
-    </Container>
+      </Container>
     </>
   );
 };

@@ -33,6 +33,7 @@ const Estrenos = () => {
             <ContainerMovies>
                 <Container maxWidth="md">
                     <MotionTitle text="ÚLTIMOS ESTRENOS" />
+                    <p style={{padding:0, marginBottom:"15px", color:"#fff", fontFamily:"monospace"}}>(clickea para más información)</p>
                     <MotionCards arr={movies} />
                 </Container>
             </ContainerMovies >

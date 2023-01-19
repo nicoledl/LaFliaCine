@@ -1,6 +1,5 @@
-import { Button, CircularProgress,Grid, Typography } from "@mui/material"
+import { Button, CircularProgress, Grid, Typography } from "@mui/material"
 import { useEffect, useState } from "react";
-//import axios from "axios"
 import party from "party-js"
 import Fade from '@mui/material/Fade';
 import { Container } from "@mui/system"
@@ -10,7 +9,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const styleInput = { width: "100%", border: "none", height: "30px", fontSize: "20px", padding: 5, marginTop: 10, display: "block" }
-const styleImg = { width: "28vh", height: "28vh", borderRadius: "50%", objectFit: "cover", display: "block", marginLeft: "auto", marginRight: "auto", border: "30px solid", borderColor: "#AB3428" }
+const styleImg = { width: "35vh", height: "35vh", borderRadius: "50%", objectFit: "cover", display: "block", marginLeft: "auto", marginRight: "auto", border: "30px solid", borderColor: "#AB3428" }
 const styleCorrectText = { color: "#fff", display: "grid", textAlign: "center", fontFamily: "Fjalla One", fontSize: "clamp(1.5rem, 8vw - 2rem, 3rem)", margin: 0, padding: 0, textShadow: " 0px 0px 5px #FFF77C, 0px 0px 8px #FFF327, 0px 0px 17px #FFEAD2, 0px 0px 17px #FFEAD2" }
 const styleIncorrectText = { color: "#fff", display: "grid", textAlign: "center", fontFamily: "Fjalla One", fontSize: "clamp(1.5rem, 8vw - 2rem, 3rem)", margin: 0, padding: 0, textShadow: "0px 0px 6px #FFDF00, 0px 0px 8px #FF8B01, 0px 0px 10px #FF0000, 0px 0px 10px #FF0000" }
 const syleButton = { border: "solid", borderColor: "#fff", backgroundColor: "#AB3428", borderRadius: "18px", margin: 8, color: "#fff", marginTop: "20px", fontFamily: "Fjalla One" }
@@ -66,7 +65,7 @@ const Game = () => {
     return (
         <Container style={{ marginTop: "10%", marginBottom: "10%" }}>
             <MotionTitle className="titulo-juego" text="ADIVINA LA CELEBRIDAD" />
-            <div style={{ height: "4px", paddingBottom:"5%" }}>
+            <div style={{ height: "4px", paddingBottom: "5%" }}>
                 {
                     correct === true ? <Fade in={correct}><p style={styleCorrectText}>CORRECTO</p></Fade> : null
                 }

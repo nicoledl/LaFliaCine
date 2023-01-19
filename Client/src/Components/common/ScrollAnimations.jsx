@@ -8,7 +8,7 @@ import ReactCardFlip from "react-card-flip";
 const Titulo = styled.h1`
   color:#F5EE9E;
   font-family:  'Bebas Neue';
-  font-size: clamp(2rem, 10.7vw - 2.7rem, 4rem);
+  font-size: clamp(2.5rem, 2.7vw + 1.3rem, 3rem);
 `;
 
 const titleVariant = {
@@ -55,7 +55,7 @@ const Flip = ({ movie }) => {
     const styleBack = { background: "#AB3428", color: "#fff", height: "400px", width: "260px", fontFamily: "Fjalla One", fontSize: "15px", lineHeight: 1.2, wordSpacing: 1, position: "relative", display: "table-cell", verticalAling: "middle", outline: "8px solid #F5EE9E", boxShadow: "0px 10px 13px -7px #000000, 0px 8px 30px -1px rgba(0,0,0,0.39)" }
 
     return (
-        <Grid item key={movie.id} md={4} sm={12}>
+        <Grid item key={movie.id} md={4} sm={12} xs={12}>
             <ReactCardFlip isFlipped={flip} flipDirection="horizontal" >
                 <motion.div className="item" variants={card}>
                     <Container maxWidth="sm" onClick={handleClick} sx={styleFront} />

@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import TheaterComedyIcon from "@mui/icons-material/TheaterComedy";
-import { Link } from "@mui/material";
+import { Avatar, Link } from "@mui/material";
 import "./navbar.css";
 
 const pages = [{ name: "Peliculas", href: "movies" }, { name: "Series", href: "series" }, { name: "Ingresar", href: "login" }, { name: "Registrarse", href: "signup" }];
@@ -147,7 +147,7 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
+                <Avatar />
               </IconButton>
             </Tooltip>
             <Menu
@@ -167,11 +167,11 @@ const Navbar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
+                <MenuItem  key={setting.name} onClick={handleCloseUserMenu}>
                   <Link
                     key={setting.name}
                     href={`/${setting.href}`}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none", color:"black" }}
                   >
                     <Typography textAlign="center">{setting.name}</Typography>
                   </Link>

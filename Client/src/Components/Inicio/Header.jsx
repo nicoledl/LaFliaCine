@@ -3,7 +3,8 @@ import { Container } from "@mui/system";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Carousel from "react-material-ui-carousel";
-import "./animationTitle.css"
+import "./home.css"
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 
 const ImagenHeader = styled.div`
   height: 95vh;
@@ -57,8 +58,9 @@ justify-content: center;
 align-items: center;
 `;
 
-const Header = () => {
+const Header = ({ setState }) => {
   const [ultimasPeliculas, setUltimasPeliculas] = useState([]);
+
 
   const API_LASTEST_MOVIES = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=es-MX&page=1`;
   const API_IMG = `https://image.tmdb.org/t/p/original/`;
@@ -74,8 +76,19 @@ const Header = () => {
     // eslint-disable-next-line
   }, []);
 
+  const timer = () => {
+    setState(true)
+    setTimeout(() => { setState(false) }, 2000)
+  }
+
+  const styleConteinerArrow = { position: "absolute", height: "90vh", left: "50%", marginLeft: "-50px" }
+  const styleIconArrow = { position: "absolute", bottom: 0, zIndex: "2", cursor: "pointer", background: "#00000062", borderRadius: "50%", padding: 1 }
+
   return (
     <Container className="containerHeader" maxWidth="100%" style={{ padding: "0" }}>
+      <Container maxWidth="xs" sx={styleConteinerArrow}>
+        <KeyboardDoubleArrowDownIcon color="warning" fontSize="large" onClick={timer} sx={styleIconArrow} />
+      </Container >
       <Carousel
         height="95vh"
         navButtonsAlwaysInvisible={true}
@@ -97,7 +110,6 @@ const Header = () => {
             >
               <Frases>
                 <Titulo>Organizar tus gustos cinéfilos y seriales, nunca fue tan fácil</Titulo>
-                {/* <span className="animate-charcter">Organizar tus gustos cinéfilos y seriales, nunca fue tan fácil</span> */}
               </Frases>
             </ImagenHeader>
           );

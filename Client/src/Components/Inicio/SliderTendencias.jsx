@@ -3,7 +3,7 @@ import axios from "axios";
 import { Container } from "@mui/system";
 import Carousel from "react-material-ui-carousel";
 import MediaCard from "./MediaCard";
-import "./animationTitle.css"
+import "./home.css"
 import { MotionTitle } from "../common/ScrollAnimations";
 
 const SliderTendencias = () => {

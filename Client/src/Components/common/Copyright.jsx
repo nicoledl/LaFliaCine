@@ -1,12 +1,15 @@
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography'
+import { Container } from '@mui/system';
 
 function Copyright(props) {
-    return (
+  return (
+    <Container maxWidth="sm">
       <Typography
-        variant="body2"
+        variant="body1"
         align="center"
         {...props}
+        sx={{margin:"20px", padding:"20px"}}
       >
         {"Copyright © "}
         <Link color="inherit" href="/">
@@ -15,7 +18,8 @@ function Copyright(props) {
         {new Date().getFullYear()}
         {"."}
       </Typography>
-    );
-  }
+    </Container>
+  );
+}
 
 export default Copyright;
