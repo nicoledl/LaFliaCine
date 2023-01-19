@@ -64,7 +64,7 @@ const MediaCard = ({ contenido }) => {
       </Hidden>
 
       <Hidden smUp>
-        <ImageList variant="standard" cols={2} gap={6} rowHeight={200}>
+        <ImageList variant="standard" cols={2} gap={30} rowHeight={200}>
           {contenido.map((elem) => {
             const img = `https://image.tmdb.org/t/p/original/` + elem.poster_path;
 

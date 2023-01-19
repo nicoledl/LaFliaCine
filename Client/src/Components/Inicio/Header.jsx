@@ -81,7 +81,7 @@ const Header = ({ setState }) => {
     setTimeout(() => { setState(false) }, 2000)
   }
 
-  const styleConteinerArrow = { position: "absolute", height: "90vh", left: "50%", marginLeft: "-50px" }
+  const styleConteinerArrow = { position: "absolute", height: "90vh", left: "50%", marginLeft: "-50px", width:"5%" }
   const styleIconArrow = { position: "absolute", bottom: 0, zIndex: "2", cursor: "pointer", background: "#00000062", borderRadius: "50%", padding: 1}
 
   return (

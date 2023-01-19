@@ -102,7 +102,7 @@ const SliderTendencias = () => {
             animation="slide"
             indicators={false}
             swipe={true}
-            sx={{ margin: 2, boxShadow: "-1px 1px 17px 8px rgba(0,0,0,1) inset" , height: "14em"}}
+            sx={{ margin: 2, boxShadow: "-1px 1px 17px 8px rgba(0,0,0,1) inset" , height: "14.5em"}}
           >
             {array.map((content, i) => {
               const copyArray = [...content]
