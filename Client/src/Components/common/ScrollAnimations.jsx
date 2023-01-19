@@ -45,10 +45,15 @@ export const MotionTitle = ({ text }) => {
 const Flip = ({ movie }) => {
     const [flip, setFlip] = useState(false)
 
-    const API_IMG = `https://image.tmdb.org/t/p/original/`;
+    let API_IMG = `https://image.tmdb.org/t/p/original/`;
+    // const imgNull = "https://canalcocina.es/medias/publicuploads/2015/07/07/147549/846988273559c066aac7193.09884642.png";
 
     const handleClick = () => {
         setFlip(!flip)
+    }
+
+    if (API_IMG === undefined || API_IMG === null) {
+        API_IMG = "https://canalcocina.es/medias/publicuploads/2015/07/07/147549/846988273559c066aac7193.09884642.png";
     }
 
     const styleFront = { backgroundImage: `url("${API_IMG + movie.poster_path}")`, backgroundSize: "cover", height: "400px", width: "260px", position: "relative", outline: "8px solid #F5EE9E", boxShadow: "0px 10px 13px -7px #000000, 0px 8px 30px -1px rgba(0,0,0,0.39)", display: "table", }
