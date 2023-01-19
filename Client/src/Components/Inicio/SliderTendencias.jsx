@@ -5,6 +5,7 @@ import Carousel from "react-material-ui-carousel";
 import MediaCard from "./MediaCard";
 import "./home.css"
 import { MotionTitle } from "../common/ScrollAnimations";
+import { Hidden } from "@mui/material";
 
 const SliderTendencias = () => {
   const [movies, setMovies] = useState([]);
@@ -53,20 +54,69 @@ const SliderTendencias = () => {
   }, []);
 
   function carousel(array) {
+
     return (
-      <Carousel
-        height={340}
-        autoPlay={true}
-        topAutoPlayOnHover={true}
-        animation="slide"
-        indicators={false}
-        swipe={true}
-        sx={{ margin: 2, boxShadow: "-1px 1px 17px 8px rgba(0,0,0,1) inset" }}
-      >
-        {array.map((content, i) => (
-          <MediaCard key={i} contenido={content} />
-        ))}
-      </Carousel>)
+      <>
+        <Hidden mdDown>
+          <Carousel
+            height={340}
+            autoPlay={true}
+            topAutoPlayOnHover={true}
+            animation="slide"
+            indicators={false}
+            swipe={true}
+            sx={{ margin: 2, boxShadow: "-1px 1px 17px 8px rgba(0,0,0,1) inset", height: "inherit" }}
+          >
+            {array.map((content, i) => (
+              <MediaCard key={i} contenido={content} />
+            ))}
+          </Carousel>
+        </Hidden>
+
+        <Hidden mdUp smDown>
+          <Carousel
+            height={340}
+            autoPlay={true}
+            topAutoPlayOnHover={true}
+            animation="slide"
+            indicators={false}
+            swipe={true}
+            sx={{ margin: 2, boxShadow: "-1px 1px 17px 8px rgba(0,0,0,1) inset", height: "18em" }}
+          >
+            {array.map((content, i) => {
+              const copyArray = [...content]
+              const smArray = copyArray.splice(0, 4)
+              return (
+                <MediaCard key={i} contenido={smArray} />
+              )
+            }
+            )}
+          </Carousel>
+        </Hidden>
+
+        <Hidden smUp>
+          <Carousel
+            height={340}
+            autoPlay={true}
+            topAutoPlayOnHover={true}
+            animation="slide"
+            indicators={false}
+            swipe={true}
+            sx={{ margin: 2, boxShadow: "-1px 1px 17px 8px rgba(0,0,0,1) inset" , height: "14em"}}
+          >
+            {array.map((content, i) => {
+              const copyArray = [...content]
+              const xsArray = copyArray.splice(0, 2)
+              console.log(xsArray)
+              return (
+                <MediaCard key={i} contenido={xsArray} />
+              )
+            }
+            )}
+          </Carousel>
+        </Hidden>
+      </>
+    )
   }
 
   return (

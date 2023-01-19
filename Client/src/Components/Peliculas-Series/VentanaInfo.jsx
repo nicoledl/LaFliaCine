@@ -13,6 +13,7 @@ import { Container } from "@mui/system";
 import Stack from '@mui/material/Stack';
 import LinearProgress from '@mui/material/LinearProgress';
 import { Divider, ImageList } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 
 const InfoContainer = styled.button`
   decoration: none;
@@ -41,7 +42,6 @@ const StyleBox = {
 };
 
 const StyleInsideBox = {
-  padding: "30px",
   paddingTop: "5vh",
 };
 
@@ -116,6 +116,9 @@ const VentanaInfo = ({ id, formato }) => {
       filter: "saturate(130%)",
     };
 
+    const styleConteinerArrow = { position: "absolute", height: "90vh", left: "50%", marginLeft: "-50px" }
+    const styleIconArrow = { position: "absolute", top: 0, right: 0, zIndex: "2", cursor: "pointer", border: "1px solid", borderRadius: "50%", padding: "0.5%", marginTop: 5 }
+
     return (
       <div>
         <InfoContainer onClick={handleOpen}>
@@ -136,16 +139,15 @@ const VentanaInfo = ({ id, formato }) => {
           open={open}
           onClose={handleClose}
           closeAfterTransition
-          // BackdropComponent={Backdrop}
-          // Backdrop{{
-          //   timeout: 500,
-          // }}
           sx={{
             overflow: "scroll",
           }}
         >
           <Fade in={open}>
             <Container maxWidth="md" sx={StyleBox}>
+              <Container maxWidth="xs" sx={styleConteinerArrow}>
+                <CloseIcon fontSize="sm" sx={styleIconArrow} onClick={() => { setOpen(false) }} />
+              </Container >
               <Container sx={StyleInsideBox}>
                 <div style={ImgFondo} ></div>
                 <Typography id="transition-modal-title" variant="h2" sx={{ fontFamily: "'Francois One', sans-serif" }}>
@@ -159,18 +161,18 @@ const VentanaInfo = ({ id, formato }) => {
                   sx={{ mt: 2, fontSize: "1em", fontFamily: "'M PLUS Rounded 1c', sans-serif", fontWeight: "400", height: "auto", paddingBottom: "20px" }}
                 >
                   Sinopsis: {data.overview}
-                  <Container>
+                  <Container maxWidth="md">
                     <ReactPlayer
                       playing={true}
                       loop={false}
                       controls={true}
                       width="100%"
                       url={VIDEO_YOUTUBE}
-                      style={{ height: "auto" }}
+                      style={{ height: "auto", marginTop: 10 }}
                     /></Container>
                   <Container maxWidth="md">
                     <Divider textAlign="left"><h3>CASTING</h3></Divider>
-                    <ImageList cols={8} gap="8px" sx={{ textAlign: "center", alignItems: "center", display: "flex", padding:"auto" }}>
+                    <ImageList cols={8} gap="8px" sx={{ textAlign: "center", alignItems: "center", display: "flex", padding: "auto" }}>
                       {
                         credits.map((person, i) => {
                           //{person.name} as {person.character}

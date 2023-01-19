@@ -51,8 +51,8 @@ const Flip = ({ movie }) => {
         setFlip(!flip)
     }
 
-    const styleFront = { backgroundImage: `url("${API_IMG + movie.poster_path}")`, backgroundSize: "cover", height: "400px", width: "260px", position: "relative", outline: "8px solid #F5EE9E", boxShadow: "0px 10px 13px -7px #000000, 0px 8px 30px -1px rgba(0,0,0,0.39)" }
-    const styleBack = { background: "#AB3428", color: "#fff", height: "400px", width: "260px", fontFamily: "Fjalla One", fontSize: "15px", lineHeight: 1.2, wordSpacing: 1, position: "relative", display: "table-cell", verticalAling: "middle", outline: "8px solid #F5EE9E", boxShadow: "0px 10px 13px -7px #000000, 0px 8px 30px -1px rgba(0,0,0,0.39)" }
+    const styleFront = { backgroundImage: `url("${API_IMG + movie.poster_path}")`, backgroundSize: "cover", height: "400px", width: "260px", position: "relative", outline: "8px solid #F5EE9E", boxShadow: "0px 10px 13px -7px #000000, 0px 8px 30px -1px rgba(0,0,0,0.39)", display: "table", }
+    const styleBack = { background: "#AB3428", color: "#fff", height: "400px", width: "260px", fontFamily: "Fjalla One", fontSize: "15px", lineHeight: 1.2, wordSpacing: 1, position: "relative", display: "table", verticalAling: "middle", outline: "8px solid #F5EE9E", boxShadow: "0px 10px 13px -7px #000000, 0px 8px 30px -1px rgba(0,0,0,0.39)" }
 
     return (
         <Grid item key={movie.id} md={4} sm={12} xs={12}>
@@ -61,14 +61,14 @@ const Flip = ({ movie }) => {
                     <Container maxWidth="sm" onClick={handleClick} sx={styleFront} />
                 </motion.div>
 
-                <Container maxWidth="sm" onClick={handleClick} sx={styleBack} >
-                    <motion.div className="item" variants={card}>
+                <motion.div className="item" variants={card}>
+                    <Container maxWidth="sm" onClick={handleClick} sx={styleBack} >
                         <h2 style={{ fontFamily: 'Bebas Neue' }}>{movie.title}</h2>
                         <Divider />
                         <p style={{ fontWeight: 'bold', fontSize: "18px" }}>Fecha de Estreno {movie.release_date}</p>
                         <p style={{ padding: 0, margin: 0 }}>{movie.overview}</p>
-                    </motion.div>
-                </ Container>
+                    </ Container>
+                </motion.div>
             </ReactCardFlip >
         </Grid >
     )
