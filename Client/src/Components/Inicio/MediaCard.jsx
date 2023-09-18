@@ -24,7 +24,7 @@ const MediaCard = ({ contenido }) => {
                 />
                 <ImageListItemBar
                   title={elem.media_type === "tv" ? elem.name : elem.title}
-                  subtitle={`${elem.vote_average}⭐`}
+                  subtitle={`${elem.vote_average.toFixed(1)}⭐`}
                   sx={{ borderRadius: "0 0 20px 20px" }}
                 />
               </ImageListItem>)

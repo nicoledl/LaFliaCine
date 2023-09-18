@@ -61,18 +61,22 @@ align-items: center;
 const Header = ({ setState }) => {
   const [ultimasPeliculas, setUltimasPeliculas] = useState([]);
 
-
-  const API_LASTEST_MOVIES = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=es-MX&page=1`;
+  const API_TRENDING_MOVIES = `${process.env.REACT_APP_BASE_URL}trending/movie/day?language=es-AR`;
   const API_IMG = `https://image.tmdb.org/t/p/original/`;
   const imgNull =
     "https://canalcocina.es/medias/publicuploads/2015/07/07/147549/846988273559c066aac7193.09884642.png";
 
   useEffect(() => {
     axios
-      .get(API_LASTEST_MOVIES)
+      .get(API_TRENDING_MOVIES, {
+        headers: {
+          accept: "application/json",
+          Authorization: process.env.REACT_APP_TMDB_API_KEY,
+        },
+      })
       .then((res) => res.data.results)
       .then((res) => setUltimasPeliculas(res.splice(0, 4)))
-      .catch(() => console.error("Not Found"))
+      .catch((error) => console.error(error))
     // eslint-disable-next-line
   }, []);
 

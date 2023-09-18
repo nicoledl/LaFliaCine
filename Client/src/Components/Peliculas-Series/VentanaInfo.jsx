@@ -55,16 +55,21 @@ const VentanaInfo = ({ id, formato }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const urlData = `https://api.themoviedb.org/3/${formato}/${id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=es-MX`
-  const movieCredits = `https://api.themoviedb.org/3/${formato}/${id}/credits?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=es-MX`
-  const API_VIDEO_EN = `https://api.themoviedb.org/3/${formato}/${id}/videos?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`;
+  const urlData = `${process.env.REACT_APP_BASE_URL}${formato}/${id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=es-AR`
+  const movieCredits = `${process.env.REACT_APP_BASE_URL}${formato}/${id}/credits?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=es-AR`
+  const API_VIDEO_EN = `${process.env.REACT_APP_BASE_URL}${formato}/${id}/videos?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`;
   const VIDEO_YOUTUBE = `https://www.youtube.com/watch?v=${video}`;
   let API_IMG = `https://image.tmdb.org/t/p/original/`;
   const imgNull = "https://canalcocina.es/medias/publicuploads/2015/07/07/147549/846988273559c066aac7193.09884642.png";
 
   useEffect(() => {
     if (open) {
-      axios.get(API_VIDEO_EN)
+      axios.get(API_VIDEO_EN, {
+        headers: {
+          accept: "application/json",
+          Authorization: process.env.REACT_APP_TMDB_API_KEY,
+        },
+      })
         .then(res => setVideo(res.data.results[0].key))
         .catch(() => console.error("Not Found"))
     }
@@ -72,12 +77,22 @@ const VentanaInfo = ({ id, formato }) => {
   }, [open]);
 
   useEffect(() => {
-    axios.get(urlData)
+    axios.get(urlData, {
+      headers: {
+        accept: "application/json",
+        Authorization: process.env.REACT_APP_TMDB_API_KEY,
+      },
+    })
       .then(res => setData(res.data))
       .catch(() => console.error("Not Found"))
     // eslint-disable-next-line
 
-    axios.get(movieCredits)
+    axios.get(movieCredits, {
+      headers: {
+        accept: "application/json",
+        Authorization: process.env.REACT_APP_TMDB_API_KEY,
+      },
+    })
       .then(res => setCredits(res.data.cast.splice(0, 8)))
       .catch(() => console.error("Not Found"))
     // eslint-disable-next-line

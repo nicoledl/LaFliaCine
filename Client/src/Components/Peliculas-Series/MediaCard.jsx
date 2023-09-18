@@ -37,7 +37,7 @@ const ImgContainer = styled.div`
 const MediaCard = ({ id, formato }) => {
   const [data, setData] = useState([])
 
-  const urlData = `https://api.themoviedb.org/3/${formato}/${id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=es-MX`
+  const urlData = `${process.env.REACT_APP_BASE_URL}${formato}/${id}?language=es-AR`
   const API_IMG = `https://image.tmdb.org/t/p/original/`;
   const imgNull =
     "https://canalcocina.es/medias/publicuploads/2015/07/07/147549/846988273559c066aac7193.09884642.png";
@@ -46,7 +46,12 @@ const MediaCard = ({ id, formato }) => {
   const year = releaseDate.getFullYear()
 
   useEffect(() => {
-    axios.get(urlData)
+    axios.get(urlData, {
+      headers: {
+        accept: "application/json",
+        Authorization: process.env.REACT_APP_TMDB_API_KEY,
+      },
+    })
       .then(res => setData(res.data))
       .catch(() => console.error("Not Found"))
     // eslint-disable-next-line
