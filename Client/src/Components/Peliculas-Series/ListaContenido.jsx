@@ -139,10 +139,10 @@ const ListaContenido = ({ formato }) => {
         : new Date(elem.first_air_date);
     return (
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={4} columns={{ xs: 4, sm: 8, md: 12, lg: 12 }}>
+        <Grid container spacing={4}>
           {array?.map((elem, i) => {
             return (
-              <Grid item xs={12} sm={4} md={4} lg={3} key={elem.id}>
+              <Grid item xs={12} sm={6} md={3} lg={3} key={elem.id}>
                 <MediaCard
                   key={i}
                   titulo={elem.title === undefined ? elem.name : elem.title}
