@@ -1,21 +1,12 @@
 .containerRegister {
-    background: linear-gradient(-45deg, #F5EE9E, #F49E4C, #AB3428);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-    height: fit-content;
-    min-height: 100vh;
+  height: 100vh;
 }
 
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
+.register-form {
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  width: inherit;
+  height: auto;
+  box-shadow: 0 20px 20px #000000;
+  padding: 10px 30px;
 }

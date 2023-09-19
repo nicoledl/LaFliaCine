@@ -1,53 +1,68 @@
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import fondoPelis from "../../assets/img/fondo-peliculas.jpg";
 import "./Fondo-degradado-animado.css";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from "@mui/material/styles";
 import TheaterComedyIcon from "@mui/icons-material/TheaterComedy";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import axios from "axios";
+import {
+  Box,
+  Button,
+  IconButton,
+  InputAdornment,
+  TextField,
+  createTheme,
+  styled,
+} from "@mui/material";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Visibility from "@mui/icons-material/Visibility";
 
 const theme = createTheme({
   palette: {
     neutral: {
-      main: '#131313',
-      contrastText: '#131313',
+      main: "#131313",
+      contrastText: "#131313",
     },
   },
 });
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="/">
-        La Flia Cine
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+const BotonEnviar = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText("#ba2113"),
+  backgroundColor: "#ba2113",
+  "&:hover": {
+    backgroundColor: "#912218",
+  },
+}));
 
 const FormLogin = () => {
-  const handleSubmit = (event) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = async (data) => {
+    try {
+      // eslint-disable-next-line no-unused-vars
+      const response = await axios.post(
+        "http://localhost:3000/auth/login",
+        data
+      );
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
   };
 
   return (
@@ -78,76 +93,70 @@ const FormLogin = () => {
               flexDirection: "column",
               alignItems: "center",
               position: "absolute",
-              color: "#131313"
+              color: "#131313",
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: "#AB3428" }}>
               <TheaterComedyIcon />
             </Avatar>
-            <Typography variant="h3" sx={{ fontFamily: "'Ultra', serif", letterSpacing: "2px" }}>
+            <Typography
+              variant="h3"
+              sx={{
+                fontFamily: "'Ultra', serif",
+                letterSpacing: "2px",
+                mb: 5,
+                textAlign: "center",
+              }}
+            >
               La Flia Cine
             </Typography>
-            <Box
-              component="form"
-              noValidate
-              onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
-            >
-              <ThemeProvider theme={theme}>
+            <ThemeProvider theme={theme}>
+              <Box
+                component="form"
+                onSubmit={handleSubmit(onSubmit)}
+                sx={{ display: "grid", gap: 2 }}
+              >
                 <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="email"
+                  id="outlined-multiline-flexible"
                   label="Mail"
-                  name="email"
-                  autoComplete="email"
-                  autoFocus
-                  variant="filled"
+                  type="text"
+                  placeholder="mail"
+                  {...register("mail", { required: true })}
+                  multiline
+                  maxRows={4}
                   color="neutral"
                 />
                 <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
+                  id="outlined-adornment-password"
+                  type={showPassword ? "text" : "password"}
+                  {...register("contraseña", { required: true })}
+                  placeholder="contraseña"
                   label="Contraseña"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  variant="filled"
                   color="neutral"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
-                <FormControlLabel
-                  control={<Checkbox value="remember" color="neutral" />}
-                  label="Recordar"
-                />
-                <Button
-                  className="button"
-                  fullWidth
+                <BotonEnviar
+                  variant="contained"
                   type="submit"
-                  size="medium"
-                  sx={{ mt: 5, mb: 8, }}
+                  sx={{ width: 1 / 4, mb: 2 }}
                 >
-                  <Typography variant="h5" sx={{ color: "#ddd", fontWeight: "700", fontFamily: "'Fjalla One', sans-serif" }}>
-                    Ingresar
-                  </Typography>
-                </Button>
-                <Grid container>
-                  <Grid item xs>
-                    <Link href="#" variant="body2" underline="hover" sx={{ color: "#131313", borderBottom: "#ddd" }}>
-                      ¿Olvidaste tu contaseña?
-                    </Link>
-                  </Grid>
-                  <Grid item>
-                    <Link href="/signup" variant="body2" underline="hover" sx={{ color: "#131313", borderBottom: "#ddd" }}>
-                      {"¿No tenés cuenta? ¡Registrate acá!"}
-                    </Link>
-                  </Grid>
-                </Grid>
-                <Copyright sx={{ mt: 5 }} />
-              </ThemeProvider>
-            </Box>
+                  Enviar
+                </BotonEnviar>
+              </Box>
+            </ThemeProvider>
           </Box>
         </div>
       </Grid>

@@ -3,7 +3,6 @@ const cors = require("cors");
 const app = express();
 const { connection } = require("./database/dbConnection");
 const authRoutes = require("./routes/auth");
-require("./database/asociations");
 
 // setting
 const PORT = process.env.PORT || 3000;

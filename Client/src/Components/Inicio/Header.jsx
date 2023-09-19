@@ -3,8 +3,8 @@ import { Container } from "@mui/system";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Carousel from "react-material-ui-carousel";
-import "./home.css"
-import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import "./home.css";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 
 const ImagenHeader = styled.div`
   height: 95vh;
@@ -18,13 +18,13 @@ const ImagenHeader = styled.div`
 `;
 
 const Titulo = styled.h1`
-text-transform: uppercase;
+  text-transform: uppercase;
   background-image: linear-gradient(
     -225deg,
-    #F5EE9E 0%,
-    #AB3428 29%,
-    #F49E4C 67%,
-    #F5EE9E 100%
+    #f5ee9e 0%,
+    #ab3428 29%,
+    #f49e4c 67%,
+    #f5ee9e 100%
   );
   background-size: auto auto;
   background-clip: border-box;
@@ -42,20 +42,20 @@ text-transform: uppercase;
   letter-spacing: 5px;
   font-weight: 200;
 
-@keyframes textclip {
-to {
-background-position: 200% center;
-}
-}
-`
+  @keyframes textclip {
+    to {
+      background-position: 200% center;
+    }
+  }
+`;
 
 const Frases = styled.div`
-font-size: clamp(2rem, 8vw - 2.5rem, 4rem);
-width: 70%;
-height: 100%;
-display: flex;
-justify-content: center;
-align-items: center;
+  font-size: clamp(2rem, 8vw - 2.5rem, 4rem);
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Header = ({ setState }) => {
@@ -76,23 +76,48 @@ const Header = ({ setState }) => {
       })
       .then((res) => res.data.results)
       .then((res) => setUltimasPeliculas(res.splice(0, 4)))
-      .catch((error) => console.error(error))
+      .catch((error) => console.error(error));
     // eslint-disable-next-line
   }, []);
 
   const timer = () => {
-    setState(true)
-    setTimeout(() => { setState(false) }, 2000)
-  }
+    setState(true);
+    setTimeout(() => {
+      setState(false);
+    }, 2000);
+  };
 
-  const styleConteinerArrow = { position: "absolute", height: "90vh", left: "50%", marginLeft: "-50px", width:"5%" }
-  const styleIconArrow = { position: "absolute", bottom: 0, zIndex: "2", cursor: "pointer", background: "#00000062", borderRadius: "50%", padding: 1}
+  const styleConteinerArrow = {
+    position: "absolute",
+    height: "90vh",
+    left: "50%",
+    marginLeft: "-50px",
+    width: "5%",
+  };
+  const styleIconArrow = {
+    position: "absolute",
+    bottom: 0,
+    zIndex: "2",
+    cursor: "pointer",
+    background: "#00000062",
+    borderRadius: "50%",
+    padding: 1,
+  };
 
   return (
-    <Container className="containerHeader" maxWidth="100%" style={{ padding: "0" }}>
+    <Container
+      className="containerHeader"
+      maxWidth="100%"
+      style={{ padding: "0" }}
+    >
       <Container maxWidth="xs" sx={styleConteinerArrow}>
-        <KeyboardDoubleArrowDownIcon color="warning" fontSize="large" onClick={timer} sx={styleIconArrow} />
-      </Container >
+        <KeyboardDoubleArrowDownIcon
+          color="warning"
+          fontSize="large"
+          onClick={timer}
+          sx={styleIconArrow}
+        />
+      </Container>
       <Carousel
         height="95vh"
         navButtonsAlwaysInvisible={true}
@@ -103,17 +128,19 @@ const Header = ({ setState }) => {
         {ultimasPeliculas.map((elem) => {
           let imagenFondo = `${API_IMG}${elem.backdrop_path}`;
           if (imagenFondo === undefined || imagenFondo === "") {
-            imagenFondo = imgNull
+            imagenFondo = imgNull;
           }
           return (
             <ImagenHeader
               style={{
-                backgroundImage: `linear-gradient(0deg, rgba(17,19,22,1) 9%, rgba(18,21,26,0.8533614129245448) 56%, rgba(34,48,83,0.39117653897496496) 100%), url(${imagenFondo})`,
+                backgroundImage: `linear-gradient(0deg, rgba(10, 17, 25, 1) 9%, rgba(10, 17, 25, 0.8533614129245448) 56%, rgba(10, 17, 25,0.20) 100%), url(${imagenFondo})`,
               }}
               key={elem.id}
             >
               <Frases>
-                <Titulo>Organizar tus gustos cinéfilos y seriales, nunca fue tan fácil</Titulo>
+                <Titulo>
+                  Organizar tus gustos cinéfilos y seriales, nunca fue tan fácil
+                </Titulo>
               </Frases>
             </ImagenHeader>
           );

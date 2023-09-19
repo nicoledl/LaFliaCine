@@ -1,21 +1,22 @@
-const User = require("../database/models/User");
+const Usuario = require("../database/models/Usuario");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 async function loginUser(req, res) {
-  const { username, password } = req.body;
-  try {
-    const user = await User.findOne({ where: { username } });
+  const { mail, contraseña} = req.body;
 
-    if (!user) {
+  try {
+    const usuario = await Usuario.findOne({ where: { mail } });
+
+    if (!usuario) {
       return res.status(401).json({ error: "Credenciales incorrectas" });
     }
 
     // Verify password using bcrypt
     const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const hashedPassword = await bcrypt.hash(contraseña, saltRounds);
 
-    const plainPassword = password;
+    const plainPassword = contraseña;
     const passwordMatch = await bcrypt.compare(plainPassword, hashedPassword);
 
     if (!passwordMatch) {
@@ -23,11 +24,11 @@ async function loginUser(req, res) {
     }
 
     const token = jwt.sign(
-      { id: user.id, username: user.username, role: user.role },
+      { id: usuario.id, usuario: usuario.username, nombre: usuario.nombre },
       process.env.JWT_SECRET_KEY,
       { expiresIn: "1h" }
     );
-
+      console.log(token);
     res.json({ token });
   } catch (error) {
     console.error("Error al iniciar sesión:", error);
@@ -36,10 +37,10 @@ async function loginUser(req, res) {
 }
 
 async function registerUser(req, res) {
-  const { username, password, email, role } = req.body;
+  const { nombre, usuario, mail, contraseña, newstle } = req.body;
 
   try {
-    const existingUser = await User.findOne({ where: { username } });
+    const existingUser = await Usuario.findOne({ where: { usuario } });
 
     if (existingUser) {
       return res
@@ -48,17 +49,18 @@ async function registerUser(req, res) {
     }
 
     const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const hashedPassword = await bcrypt.hash(contraseña, saltRounds);
 
-    const newUser = await User.create({
-      username,
-      password: hashedPassword,
-      email,
-      role,
+    const newUser = await Usuario.create({
+      nombre,
+      usuario,
+      mail,
+      contraseña: hashedPassword,
+      newstle,
     });
 
     const token = jwt.sign(
-      { id: newUser.id, username: newUser.username, role: newUser.role },
+      { id: newUser.id, username: newUser.usuario},
       process.env.JWT_SECRET_KEY,
       { expiresIn: "1h" }
     );

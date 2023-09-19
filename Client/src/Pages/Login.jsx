@@ -1,12 +1,7 @@
 import FormLogin from "../Components/Login/FormLogin"
 
 const Login=()=>{
-
-  return (
-    <>
-    <FormLogin />
-    </>
-  )
+  return <FormLogin />
 }
 
 export default Login;

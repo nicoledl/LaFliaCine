@@ -43,7 +43,7 @@ const Navbar = () => {
       className=""
       sx={{
         background:
-          "#AB3428",
+          "#ba2113",
       }}
     >
       <Container maxWidth="xl">
