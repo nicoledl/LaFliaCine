@@ -15,8 +15,18 @@ import TheaterComedyIcon from "@mui/icons-material/TheaterComedy";
 import { Avatar, Link } from "@mui/material";
 import "./navbar.css";
 
-const pages = [{ name: "Peliculas", href: "movies" }, { name: "Series", href: "series" }, { name: "Ingresar", href: "login" }, { name: "Registrarse", href: "signup" }];
-const settings = [{ name: "Perfil", href: "profile" }, { name: "Favoritos", href: "favorites" }, { name: "Vistos", href: "seen" }, { name: "Configuración", href: "config" }];
+const pages = [
+  { name: "Peliculas", href: "movies" },
+  { name: "Series", href: "series" },
+  { name: "Ingresar", href: "login" },
+  { name: "Registrarse", href: "signup" },
+];
+const settings = [
+  { name: "Perfil", href: "profile" },
+  { name: "Favoritos", href: "favorites" },
+  { name: "Vistos", href: "seen" },
+  { name: "Configuración", href: "config" },
+];
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -42,8 +52,7 @@ const Navbar = () => {
       position="static"
       className=""
       sx={{
-        background:
-          "#ba2113",
+        background: "#ba2113",
       }}
     >
       <Container maxWidth="xl">
@@ -51,15 +60,18 @@ const Navbar = () => {
           <TheaterComedyIcon
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
           />
-          <Link href="/" sx={{
-            mr: 4,
-            display: { xs: "none", md: "flex" },
-            fontSize: "2em",
-            fontFamily: "'Ultra', serif",
-            letterSpacing: "2px",
-            color: "inherit",
-            textDecoration: "none",
-          }}>
+          <Link
+            href="/"
+            sx={{
+              mr: 4,
+              display: { xs: "none", md: "flex" },
+              fontSize: "1.5em",
+              fontFamily: "'Ultra', serif",
+              letterSpacing: "2px",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
             La Flia Cine
           </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -98,7 +110,12 @@ const Navbar = () => {
                     href={`/${page.href}`}
                     style={{ textDecoration: "none", color: "black" }}
                   >
-                    <Typography textAlign="center" sx={{ fontFamily: "'M PLUS Rounded 1c', sans-serif" }}>{page.name}</Typography>
+                    <Typography
+                      textAlign="center"
+                      sx={{ fontFamily: "'M PLUS Rounded 1c', sans-serif" }}
+                    >
+                      {page.name}
+                    </Typography>
                   </Link>
                 </MenuItem>
               ))}
@@ -122,9 +139,7 @@ const Navbar = () => {
               textDecoration: "none",
             }}
           >
-            <Link href="/"
-              style={{ textDecoration: "none", color: "#fff" }}
-            >
+            <Link href="/" style={{ textDecoration: "none", color: "#fff" }}>
               La Flia Cine
             </Link>
           </Typography>
@@ -138,7 +153,12 @@ const Navbar = () => {
                 <Button
                   key={page.href}
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block", fontFamily: "'M PLUS Rounded 1c', sans-serif" }}
+                  sx={{
+                    my: 2,
+                    color: "white",
+                    display: "block",
+                    fontFamily: "'M PLUS Rounded 1c', sans-serif",
+                  }}
                 >
                   {page.name}
                 </Button>
