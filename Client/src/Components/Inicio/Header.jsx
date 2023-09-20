@@ -133,7 +133,7 @@ const Header = ({ setState }) => {
           return (
             <ImagenHeader
               style={{
-                backgroundImage: `linear-gradient(0deg, rgba(10, 17, 25, 1) 9%, rgba(10, 17, 25, 0.8533614129245448) 56%, rgba(10, 17, 25,0.20) 100%), url(${imagenFondo})`,
+                backgroundImage: `linear-gradient(0deg, rgba(13, 32, 54, 1) 9%, rgba(13, 32, 54, 0.8533614129245448) 56%, rgba(13, 32, 54,0.20) 100%), url(${imagenFondo})`,
               }}
               key={elem.id}
             >

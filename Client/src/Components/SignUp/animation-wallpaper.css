@@ -3,10 +3,10 @@
 }
 
 .register-form {
-  background-color: rgb(255, 255, 255);
+  background-color: #ffffff;
   border-radius: 20px;
   width: inherit;
   height: auto;
-  box-shadow: 0 20px 20px #000000;
+  box-shadow: 0 10px 30px #000000ae;
   padding: 10px 30px;
 }

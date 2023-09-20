@@ -10,6 +10,7 @@ import {
   FormLabel,
   IconButton,
   InputAdornment,
+  Link,
   Radio,
   RadioGroup,
   TextField,
@@ -20,6 +21,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { ThemeProvider } from "@emotion/react";
 import { useNavigate } from "react-router-dom";
+import Copyright from "../common/Copyright";
 
 const theme = createTheme({
   palette: {
@@ -65,7 +67,7 @@ const Form = () => {
 
   return (
     <Container component="main" maxWidth="sm" sx={{ py: 10 }}>
-      <div className="register-form ">
+      <Container className="register-form">
         <Typography
           variant="h5"
           sx={{
@@ -160,7 +162,17 @@ const Form = () => {
             </BotonEnviar>
           </Box>
         </ThemeProvider>
-      </div>
+      </Container>
+      <Typography
+        color="#fff"
+        sx={{ textAlign: "center", mt: 5, display: "grid" }}
+      >
+        ¿Ya tienes una cuenta?
+        <Link color="primary" href="/login">
+          Inicia sesion aquí
+        </Link>
+      </Typography>
+      <Copyright color="#fff" />
     </Container>
   );
 };

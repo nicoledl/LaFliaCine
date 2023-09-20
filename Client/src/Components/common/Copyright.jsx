@@ -12,7 +12,7 @@ function Copyright(props) {
         sx={{margin:"20px", padding:"20px"}}
       >
         {"Copyright © "}
-        <Link color="inherit" href="/">
+        <Link color="primary" href="/">
           La Flia Cine
         </Link>{" "}
         {new Date().getFullYear()}

@@ -16,12 +16,14 @@ import {
   Button,
   IconButton,
   InputAdornment,
+  Link,
   TextField,
   createTheme,
   styled,
 } from "@mui/material";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
+import Copyright from "../common/Copyright";
 
 const theme = createTheme({
   palette: {
@@ -53,6 +55,8 @@ const FormLogin = () => {
         "http://localhost:3000/auth/login",
         data
       );
+      const token = response.data.token;
+      localStorage.setItem("token", token);
       navigate("/");
     } catch (error) {
       console.error(error);
@@ -155,6 +159,13 @@ const FormLogin = () => {
                 >
                   Enviar
                 </BotonEnviar>
+                <Typography sx={{ textAlign: "center", display: "grid" }}>
+                  ¿Aún no tienes una cuenta?
+                  <Link color="primary" href="/signup">
+                    Ingresa aquí
+                  </Link>
+                </Typography>
+                <Copyright />
               </Box>
             </ThemeProvider>
           </Box>
