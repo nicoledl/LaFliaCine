@@ -3,6 +3,8 @@ const cors = require("cors");
 const app = express();
 const { connection } = require("./database/dbConnection");
 const authRoutes = require("./routes/auth");
+const favoritosRoutes = require("./routes/favoritos");
+const vistosRoutes = require("./routes/vistos");
 
 // setting
 const PORT = process.env.PORT || 3000;
@@ -14,6 +16,8 @@ app.use(express.urlencoded({ extended: false }));
 
 // routes
 app.use("/auth", authRoutes);
+app.use("/favoritos", favoritosRoutes);
+app.use("/vistos", vistosRoutes);
 
 // server
 app.listen(PORT, function () {

@@ -1,5 +1,9 @@
 const { DataTypes, Model } = require("sequelize");
 const { connection } = require("../dbConnection");
+const MoviesFavoritos = require("./MoviesFavoritos");
+const TvFavoritos = require("./TvFavoritos");
+const MoviesVistos = require("./MoviesVistos");
+const TvVistos = require("./TvVistos");
 const bcrypt = require("bcrypt");
 
 class Usuario extends Model {}
@@ -9,7 +13,7 @@ Usuario.init(
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true, // Para que se autoincremente automáticamente
+      autoIncrement: true,
     },
     nombre: {
       type: DataTypes.STRING,
@@ -31,21 +35,25 @@ Usuario.init(
     },
     newstle: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false, // Valor predeterminado en falso
+      defaultValue: false,
     },
   },
   {
     sequelize: connection,
     modelName: "Usuario",
-    timestamps: false, // Si no deseas timestamps (createdAt, updatedAt)
+    timestamps: false,
   }
 );
 
-// Función para generar el hash de la contraseña antes de guardarla en la base de datos
 Usuario.beforeCreate(async (usuario) => {
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(usuario.contraseña, saltRounds);
   usuario.contraseña = hashedPassword;
 });
+
+Usuario.hasMany(MoviesFavoritos, { foreignKey: 'usuarioId' }); 
+Usuario.hasMany(TvFavoritos, { foreignKey: 'usuarioId' }); 
+Usuario.hasMany(MoviesVistos, { foreignKey: 'usuarioId' }); 
+Usuario.hasMany(TvVistos, { foreignKey: 'usuarioId' }); 
 
 module.exports = Usuario;
