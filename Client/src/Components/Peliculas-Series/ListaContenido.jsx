@@ -106,7 +106,7 @@ const ListaContenido = ({ formato }) => {
       >
         <Pagination
           color="error"
-          count={Math.floor(api.length / 20)}
+          count={Math.floor(api / 20)}
           page={page}
           onChange={handleChange}
         />
@@ -122,12 +122,12 @@ const ListaContenido = ({ formato }) => {
             <h1 className="not-found">No hay resultados...</h1>
           </div>
         ) : (
-          paginationControlled(API_BUSQUEDA)
+          paginationControlled(API_BUSQUEDA.length)
         )}
       </PaginationContainer>
     ) : (
       <PaginationContainer>
-        {paginationControlled(API_POPULARES)}
+        {paginationControlled(500)}
       </PaginationContainer>
     );
   };

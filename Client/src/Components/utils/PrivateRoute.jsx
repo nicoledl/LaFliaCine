@@ -8,18 +8,16 @@ const verifyToken = async () => {
     if (response.data.message === "Token is valid") {
       return true;
     }
-    return false; // Si el token no es válido
+    return false; 
   } catch (error) {
-    return false; // En caso de error
+    return false; 
   }
 };
 
-// Este componente verifica si el usuario tiene un token válido
 const PrivateRoute = ({ element }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Llama a verifyToken cuando se monta el componente
     verifyToken()
       .then((result) => {
         setIsAuthenticated(result);
@@ -27,7 +25,7 @@ const PrivateRoute = ({ element }) => {
       })
       .catch((error) => {
         console.error(error);
-        setIsAuthenticated(false); // En caso de error
+        setIsAuthenticated(false); 
       });
   }, []);
 
