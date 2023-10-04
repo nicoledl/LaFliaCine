@@ -30,7 +30,6 @@ const BotonVisto = ({ contentId, formato }) => {
   }, []);
 
   const handleContent = () => {
-    console.log(contentId);
     if (!fueVisto) {
       axios
         .post(`http://localhost:3000/vistos/${formato}/${userId}/${contentId}`)

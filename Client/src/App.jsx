@@ -16,12 +16,18 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="/movies" element={<Peliculas />} />
           <Route path="/series" element={<Series />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Register />} />
           {/* Utiliza PrivateRoute para proteger la ruta */}
           <Route
+            path="/signup"
+            element={<PrivateRoute children={<Register />} path="register" />}
+          />
+          <Route
+            path="/login"
+            element={<PrivateRoute children={<Login />} path="login" />}
+          />
+          <Route
             path="/profile"
-            element={<PrivateRoute children={<Profile />} />}
+            element={<PrivateRoute children={<Profile />} path="profile" />}
           />
         </Routes>
       </BrowserRouter>

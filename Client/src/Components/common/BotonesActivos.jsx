@@ -6,14 +6,13 @@ import BotonVisto from "./BotonVisto";
 
 const verifyToken = async () => {
   const token = localStorage.getItem("token");
-
   if (!token) {
     return false;
   }
 
   try {
     const response = await axios.post(
-      `http://localhost:3000/auth/verify-token`,
+      `${process.env.REACT_APP_VERIFY_URL}`,
       null,
       {
         headers: {
