@@ -28,7 +28,7 @@ async function loginUser(req, res) {
       process.env.JWT_SECRET_KEY,
       { expiresIn: "1h" }
     );
-      console.log(token);
+    
     res.json({ token });
   } catch (error) {
     console.error("Error al iniciar sesión:", error);

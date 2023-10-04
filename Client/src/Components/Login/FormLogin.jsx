@@ -57,7 +57,7 @@ const FormLogin = () => {
       );
       const token = response.data.token;
       localStorage.setItem("token", token);
-      navigate("/");
+      navigate("/profile");
     } catch (error) {
       console.error(error);
     }

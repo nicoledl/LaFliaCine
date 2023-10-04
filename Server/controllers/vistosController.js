@@ -12,7 +12,7 @@ async function getSeenMovies(req, res) {
     });
 
     if (!userSeen) {
-      return res.status(404).json({ message: "No se encontraron películas vistas para este usuario." });
+      return res.status(200).json(null);
     }
 
     res.status(200).json(userSeen);
@@ -25,7 +25,7 @@ async function getSeenMovies(req, res) {
 // Agregar película vista por un usuario
 async function addSeenMovie(req, res) {
   const userId = req.params.id;
-  const movieId = req.body.movieId; // Asumiendo que se envía el ID de la película en el cuerpo de la solicitud
+  const movieId = parseInt(req.params.movieId, 10); // Asumiendo que se envía el ID de la película en el cuerpo de la solicitud
 
   try {
     let userSeen = await MoviesVistos.findOne({ where: { usuarioId: userId } });
@@ -38,7 +38,11 @@ async function addSeenMovie(req, res) {
       });
     } else {
       // Si el usuario ya tiene películas vistas, actualizamos el arreglo de movieIds
-      userSeen.movieIds.push(movieId);
+      const arrVistos = userSeen.dataValues.movieIds;
+      const nuevoArr = [...arrVistos, movieId];
+
+      // Actualizar movieIds en el modelo y guardar
+      userSeen.movieIds = nuevoArr;
       await userSeen.save();
     }
 
@@ -52,13 +56,17 @@ async function addSeenMovie(req, res) {
 // Eliminar película vista por un usuario
 async function removeSeenMovie(req, res) {
   const userId = req.params.id;
-  const movieId = req.body.movieId; // Asumiendo que se envía el ID de la película en el cuerpo de la solicitud
+  const movieId = parseInt(req.params.movieId, 10); // Asumiendo que se envía el ID de la película en el cuerpo de la solicitud
 
   try {
-    const userSeen = await MoviesVistos.findOne({ where: { usuarioId: userId } });
+    const userSeen = await MoviesVistos.findOne({
+      where: { usuarioId: userId },
+    });
 
     if (!userSeen) {
-      return res.status(404).json({ message: "No se encontraron películas vistas para este usuario." });
+      return res.status(404).json({
+        message: "No se encontraron películas vistas para este usuario.",
+      });
     }
 
     // Filtramos el arreglo de movieIds para eliminar la película deseada
@@ -82,7 +90,10 @@ async function getSeenTV(req, res) {
     });
 
     if (!userSeen) {
-      return res.status(404).json({ message: "No se encontraron programas de televisión vistos para este usuario." });
+      return res.status(404).json({
+        message:
+          "No se encontraron programas de televisión vistos para este usuario.",
+      });
     }
 
     res.status(200).json(userSeen);
@@ -95,7 +106,7 @@ async function getSeenTV(req, res) {
 // Agregar programa de televisión visto por un usuario
 async function addSeenTV(req, res) {
   const userId = req.params.id;
-  const tvId = req.body.tvId; // Asumiendo que se envía el ID del programa de televisión en el cuerpo de la solicitud
+  const tvId = parseInt(req.params.tvId, 10); // Asumiendo que se envía el ID del programa de televisión en el cuerpo de la solicitud
 
   try {
     let userSeen = await TvVistos.findOne({ where: { usuarioId: userId } });
@@ -108,7 +119,11 @@ async function addSeenTV(req, res) {
       });
     } else {
       // Si el usuario ya tiene programas de televisión vistos, actualizamos el arreglo de tvIds
-      userSeen.tvIds.push(tvId);
+      const userSeen = userSeen.dataValues.tvIds;
+      const nuevoArr = [...userSeen, tvId];
+
+      // Actualizar movieIds en el modelo y guardar
+      userSeen.tvIds = nuevoArr;
       await userSeen.save();
     }
 
@@ -122,13 +137,16 @@ async function addSeenTV(req, res) {
 // Eliminar programa de televisión visto por un usuario
 async function removeSeenTV(req, res) {
   const userId = req.params.id;
-  const tvId = req.body.tvId; // Asumiendo que se envía el ID del programa de televisión en el cuerpo de la solicitud
+  const tvId = parseInt(req.params.tvId, 10); // Asumiendo que se envía el ID del programa de televisión en el cuerpo de la solicitud
 
   try {
     const userSeen = await TvVistos.findOne({ where: { usuarioId: userId } });
 
     if (!userSeen) {
-      return res.status(404).json({ message: "No se encontraron programas de televisión vistos para este usuario." });
+      return res.status(404).json({
+        message:
+          "No se encontraron programas de televisión vistos para este usuario.",
+      });
     }
 
     // Filtramos el arreglo de tvIds para eliminar el programa de televisión deseado

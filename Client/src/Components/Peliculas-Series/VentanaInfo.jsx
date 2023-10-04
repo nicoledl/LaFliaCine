@@ -189,7 +189,7 @@ const VentanaInfo = ({ id, formato }) => {
                     }
                   </ImageList>
                 </Container>
-                <BotonesActivos />
+                <BotonesActivos contentId={data.id} formato={formato}  />
               </Container>
             </Container>
           </Fade>

@@ -5,14 +5,14 @@ const TvFavoritos = require("../database/models/TvFavoritos");
 // Obtener películas favoritas de un usuario
 async function getFavoriteMovies(req, res) {
   const userId = req.params.id;
-
+  
   try {
     const userFavorites = await MoviesFavoritos.findOne({
       where: { usuarioId: userId },
     });
 
     if (!userFavorites) {
-      return res.status(404).json({ message: "No se encontraron películas favoritas para este usuario." });
+      return res.status(200).json(null);
     }
 
     res.status(200).json(userFavorites);
@@ -25,10 +25,12 @@ async function getFavoriteMovies(req, res) {
 // Agregar película a favoritos de un usuario
 async function addFavoriteMovie(req, res) {
   const userId = req.params.id;
-  const movieId = req.body.movieId; // Asumiendo que se envía el ID de la película en el cuerpo de la solicitud
+  const movieId = parseInt(req.params.movieId, 10); // Asumiendo que se envía el ID de la película en el cuerpo de la solicitud
 
   try {
-    let userFavorites = await MoviesFavoritos.findOne({ where: { usuarioId: userId } });
+    let userFavorites = await MoviesFavoritos.findOne({
+      where: { usuarioId: userId },
+    });
 
     if (!userFavorites) {
       // Si el usuario no tiene películas favoritas, creamos un nuevo registro
@@ -37,9 +39,13 @@ async function addFavoriteMovie(req, res) {
         movieIds: [movieId],
       });
     } else {
-      // Si el usuario ya tiene películas favoritas, actualizamos el arreglo de movieIds
-      userFavorites.movieIds.push(movieId);
-      await userFavorites.save();
+       // Si el usuario ya tiene películas favoritas, actualizamos el arreglo de movieIds
+       const arrFavoritos = userFavorites.dataValues.movieIds;
+       const nuevoArr = [...arrFavoritos, movieId];
+ 
+       // Actualizar movieIds en el modelo y guardar
+       userFavorites.movieIds = nuevoArr;
+       await userFavorites.save();
     }
 
     res.status(201).json(userFavorites);
@@ -52,17 +58,23 @@ async function addFavoriteMovie(req, res) {
 // Eliminar película de favoritos de un usuario
 async function removeFavoriteMovie(req, res) {
   const userId = req.params.id;
-  const movieId = req.body.movieId; // Asumiendo que se envía el ID de la película en el cuerpo de la solicitud
+  const movieId = parseInt(req.params.movieId, 10); // Asumiendo que se envía el ID de la película en el cuerpo de la solicitud
 
   try {
-    const userFavorites = await MoviesFavoritos.findOne({ where: { usuarioId: userId } });
+    const userFavorites = await MoviesFavoritos.findOne({
+      where: { usuarioId: userId },
+    });
 
     if (!userFavorites) {
-      return res.status(404).json({ message: "No se encontraron películas favoritas para este usuario." });
+      return res.status(404).json({
+        message: "No se encontraron películas favoritas para este usuario.",
+      });
     }
 
     // Filtramos el arreglo de movieIds para eliminar la película deseada
-    userFavorites.movieIds = userFavorites.movieIds.filter((id) => id !== movieId);
+    userFavorites.movieIds = userFavorites.movieIds.filter(
+      (id) => id !== movieId
+    );
     await userFavorites.save();
 
     res.status(200).json(userFavorites);
@@ -82,7 +94,10 @@ async function getFavoriteTV(req, res) {
     });
 
     if (!userFavorites) {
-      return res.status(404).json({ message: "No se encontraron programas de televisión favoritos para este usuario." });
+      return res.status(404).json({
+        message:
+          "No se encontraron programas de televisión favoritos para este usuario.",
+      });
     }
 
     res.status(200).json(userFavorites);
@@ -95,10 +110,12 @@ async function getFavoriteTV(req, res) {
 // Agregar programa de televisión a favoritos de un usuario
 async function addFavoriteTV(req, res) {
   const userId = req.params.id;
-  const tvId = req.body.tvId; // Asumiendo que se envía el ID del programa de televisión en el cuerpo de la solicitud
+  const tvId = parseInt(req.params.tvId, 10); // Asumiendo que se envía el ID del programa de televisión en el cuerpo de la solicitud
 
   try {
-    let userFavorites = await TvFavoritos.findOne({ where: { usuarioId: userId } });
+    let userFavorites = await TvFavoritos.findOne({
+      where: { usuarioId: userId },
+    });
 
     if (!userFavorites) {
       // Si el usuario no tiene programas de televisión favoritos, creamos un nuevo registro
@@ -107,9 +124,13 @@ async function addFavoriteTV(req, res) {
         tvIds: [tvId],
       });
     } else {
-      // Si el usuario ya tiene programas de televisión favoritos, actualizamos el arreglo de tvIds
-      userFavorites.tvIds.push(tvId);
-      await userFavorites.save();
+      // Si el usuario ya tiene películas favoritas, actualizamos el arreglo de movieIds
+       const arrFavoritos = userFavorites.dataValues.tvIds;
+       const nuevoArr = [...arrFavoritos, tvId];
+ 
+       // Actualizar movieIds en el modelo y guardar
+       userFavorites.tvIds = nuevoArr;
+       await userFavorites.save();
     }
 
     res.status(201).json(userFavorites);
@@ -122,13 +143,18 @@ async function addFavoriteTV(req, res) {
 // Eliminar programa de televisión de favoritos de un usuario
 async function removeFavoriteTV(req, res) {
   const userId = req.params.id;
-  const tvId = req.body.tvId; // Asumiendo que se envía el ID del programa de televisión en el cuerpo de la solicitud
+  const tvId = parseInt(req.params.tvId, 10); // Asumiendo que se envía el ID del programa de televisión en el cuerpo de la solicitud
 
   try {
-    const userFavorites = await TvFavoritos.findOne({ where: { usuarioId: userId } });
+    const userFavorites = await TvFavoritos.findOne({
+      where: { usuarioId: userId },
+    });
 
     if (!userFavorites) {
-      return res.status(404).json({ message: "No se encontraron programas de televisión favoritos para este usuario." });
+      return res.status(404).json({
+        message:
+          "No se encontraron programas de televisión favoritos para este usuario.",
+      });
     }
 
     // Filtramos el arreglo de tvIds para eliminar el programa de televisión deseado

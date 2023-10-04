@@ -1,15 +1,18 @@
 const express = require("express");
 const favoritosController = require("../controllers/favoritosController");
+const verifyToken = require("../middleware/auth");
 
 const router = express.Router();
 
-router.get("/favoritos/movie/:id", favoritosController.getFavoriteMovies);
-router.get("/favoritos/tv/:id", favoritosController.getFavoriteTV);
+// router.use(verifyToken)
 
-router.post("/favoritos/movie/:id", favoritosController.addFavoriteMovie);
-router.post("/favoritos/tv/:id", favoritosController.addFavoriteTV);
+router.get("/movie/:id", favoritosController.getFavoriteMovies);
+router.get("/tv/:id", favoritosController.getFavoriteTV);
 
-router.delete("/favoritos/movie/:id", favoritosController.removeFavoriteMovie);
-router.delete("/favoritos/tv/:id", favoritosController.removeFavoriteTV);
+router.post("/movie/:id/:movieId", favoritosController.addFavoriteMovie);
+router.post("/tv/:id/:tvId", favoritosController.addFavoriteTV);
+
+router.delete("/movie/:id/:movieId", favoritosController.removeFavoriteMovie);
+router.delete("/tv/:id/:tvId", favoritosController.removeFavoriteTV);
 
 module.exports = router;

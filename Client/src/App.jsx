@@ -6,7 +6,7 @@ import Peliculas from "./Pages/Peliculas";
 import Register from "./Pages/Register";
 import Series from "./Pages/Series";
 import Profile from "./Pages/Profile";
-import PrivateRoute from "../src/Components/utils/PrivateRoute";
+import PrivateRoute from "../src/Components/services/PrivateRoute";
 
 const App = () => {
   return (
@@ -21,7 +21,7 @@ const App = () => {
           {/* Utiliza PrivateRoute para proteger la ruta */}
           <Route
             path="/profile"
-            element={<PrivateRoute element={<Profile />} />}
+            element={<PrivateRoute children={<Profile />} />}
           />
         </Routes>
       </BrowserRouter>

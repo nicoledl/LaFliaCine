@@ -90,7 +90,7 @@ const MediaCard = ({ id, formato }) => {
         />
       </CardContent>
       <Container style={{ position: "absolute", bottom: "0", padding: "0" }}>
-        <BotonesActivos />
+        <BotonesActivos contentId={data.id} formato={formato} />
       </Container>
     </CardContainer>
   );
