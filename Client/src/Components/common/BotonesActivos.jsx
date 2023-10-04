@@ -11,6 +11,7 @@ const verifyToken = async () => {
   }
 
   try {
+    // eslint-disable-next-line no-unused-vars
     const response = await axios.post(
       `${process.env.REACT_APP_VERIFY_URL}`,
       null,
@@ -43,7 +44,7 @@ const BotonesActivos = ({ contentId, formato }) => {
 
   return (
     isAuthenticated && (
-      <CardActions>
+      <CardActions sx={{ position: "absolute", bottom: 0, right: 0 }}>
         <BotonFavorito contentId={contentId} formato={formato} />
         <BotonVisto contentId={contentId} formato={formato} />
       </CardActions>

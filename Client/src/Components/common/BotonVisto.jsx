@@ -1,6 +1,6 @@
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { blue, grey } from "@mui/material/colors";
+import { blue } from "@mui/material/colors";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
@@ -55,7 +55,7 @@ const BotonVisto = ({ contentId, formato }) => {
   ) : (
     <VisibilityOffIcon
       onClick={handleContent}
-      sx={{ color: grey[900], cursor: "pointer" }}
+      sx={{ color: "#fff", cursor: "pointer" }}
     />
   );
 };

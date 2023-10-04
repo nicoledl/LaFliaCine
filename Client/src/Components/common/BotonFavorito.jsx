@@ -1,6 +1,6 @@
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { red, grey } from "@mui/material/colors";
+import { red } from "@mui/material/colors";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
@@ -59,7 +59,7 @@ const BotonFavorito = ({ contentId, formato }) => {
   ) : (
     <FavoriteBorderIcon
       onClick={handleContent}
-      sx={{ color: grey[900], cursor: "pointer" }}
+      sx={{ color: "#fff", cursor: "pointer" }}
     />
   );
 };

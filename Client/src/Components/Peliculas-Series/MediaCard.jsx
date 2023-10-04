@@ -4,14 +4,13 @@ import Typography from "@mui/material/Typography";
 import styled from "styled-components";
 import VentanaInfo from "./VentanaInfo";
 import BotonesActivos from "../common/BotonesActivos";
-import { Container } from "@mui/system";
 import { Divider } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 const CardContainer = styled.div`
   position: relative;
-  height: 370px;
+  height: 375px;
   color: #131313;
   -webkit-box-shadow: 0px 15px 16px -12px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 15px 16px -12px rgba(0, 0, 0, 0.75);
@@ -83,8 +82,7 @@ const MediaCard = ({ id, formato }) => {
       </ImgContainer>
       <CardContent>
         <Typography
-          variant={data.title?.length < 18 && "h6"}
-          fontSize={data.title?.length > 18 && 15}
+          variant={data.title?.length < 18 ? "h6" : "p"}
           color={"#fff"}
           sx={{
             fontWeight: "500",
@@ -104,11 +102,7 @@ const MediaCard = ({ id, formato }) => {
         </Divider>
         <VentanaInfo id={id} formato={formato} />
       </CardContent>
-      <Container
-        style={{ padding: "0", display: "flex", justifyContent: "end" }}
-      >
-        <BotonesActivos contentId={data.id} formato={formato} />
-      </Container>
+      <BotonesActivos contentId={data.id} formato={formato} />
     </CardContainer>
   );
 };

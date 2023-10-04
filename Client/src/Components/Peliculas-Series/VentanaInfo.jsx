@@ -250,6 +250,7 @@ const VentanaInfo = ({ id, formato }) => {
                         position: "relative",
                         margin: 0,
                       }}
+                      key={i}
                     >
                       <img
                         key={i}
@@ -266,7 +267,7 @@ const VentanaInfo = ({ id, formato }) => {
                       />
                       {mouseHover && i === photoHover && (
                         <Typography
-                          fontSize={10}
+                          fontSize={12}
                           fontFamily={"'M PLUS Rounded 1c', sans-serif"}
                           align="center"
                           sx={{
