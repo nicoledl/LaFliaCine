@@ -5,7 +5,6 @@ import Fade from "@mui/material/Fade";
 import Typography from "@mui/material/Typography";
 import BotonesActivos from "../common/BotonesActivos";
 import InfoIcon from "@mui/icons-material/Info";
-import { grey } from "@mui/material/colors";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
 import { Container } from "@mui/system";
@@ -133,10 +132,12 @@ const VentanaInfo = ({ id, formato }) => {
       <div>
         <InfoContainer onClick={handleOpen}>
           <Typography
+            color={"#fff"}
             align="left"
+            fontSize={14}
             sx={{
-              fontSize: "clamp(0.8rem, 0vw + 0.8rem, 0.80rem)",
               fontFamily: "'M PLUS Rounded 1c', sans-serif",
+              lineHeight: 1.2,
             }}
           >
             {data.overview === undefined || data.overview === null
@@ -144,7 +145,13 @@ const VentanaInfo = ({ id, formato }) => {
               : data.overview.length < 156
               ? data.overview
               : data.overview.slice(0, 156) + "..."}
-            <InfoIcon fontSize="small" sx={{ color: grey[900] }} />
+            <InfoIcon
+              color={"#fff"}
+              fontSize="small"
+              sx={{
+                position: "absolute",
+              }}
+            />
           </Typography>
         </InfoContainer>
         <Modal
@@ -259,20 +266,23 @@ const VentanaInfo = ({ id, formato }) => {
                       />
                       {mouseHover && i === photoHover && (
                         <Typography
-                          variant="p"
+                          fontSize={10}
                           fontFamily={"'M PLUS Rounded 1c', sans-serif"}
                           align="center"
                           sx={{
                             position: "absolute",
+                            width: "80px",
                             display: "flex",
                             alignItems: "center",
                             zIndex: "2",
                             top: 0,
                             left: 0,
+                            m: 0,
                             backgroundColor: "rgba(0,0,0,0.5872724089635855)",
                             backdropFilter: "blur(5px)",
                             borderRadius: "10px",
-                            height: "96%"
+                            height: "96%",
+                            flexWrap: "wrap",
                           }}
                           onMouseLeave={() => handleMouseLeave(i)}
                         >

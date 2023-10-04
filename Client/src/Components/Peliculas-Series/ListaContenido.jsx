@@ -142,7 +142,7 @@ const ListaContenido = ({ formato }) => {
         <Grid container spacing={4}>
           {array?.map((elem, i) => {
             return (
-              <Grid item xs={12} sm={6} md={3} lg={3} key={elem.id}>
+              <Grid item xs={12} sm={6} md={6} lg={3} xl={2.2} key={elem.id}>
                 <MediaCard
                   key={i}
                   titulo={elem.title === undefined ? elem.name : elem.title}

@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 const CardContainer = styled.div`
   position: relative;
-  height: max-content;
+  height: 370px;
   color: #131313;
   -webkit-box-shadow: 0px 15px 16px -12px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 15px 16px -12px rgba(0, 0, 0, 0.75);
@@ -23,6 +23,9 @@ const CardContainer = styled.div`
 `;
 
 const ImgContainer = styled.div`
+  .card-media {
+    height: 10rem;
+  }
   &:hover .card-media {
     -webkit-transform: scale(1.3);
     transform: scale(1.3);
@@ -35,7 +38,7 @@ const ImgContainer = styled.div`
 `;
 
 const MediaCard = ({ id, formato }) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState("");
 
   const urlData = `${process.env.REACT_APP_BASE_URL}${formato}/${id}?language=es-AR`;
   const API_IMG = `https://image.tmdb.org/t/p/original/`;
@@ -73,12 +76,16 @@ const MediaCard = ({ id, formato }) => {
               : API_IMG + data.backdrop_path
           }
           alt={data.title === undefined ? data.name : data.title}
-          style={{ transition: "all .5s ease-in-out" }}
+          sx={{
+            transition: "all .5s ease-in-out",
+          }}
         />
       </ImgContainer>
       <CardContent>
         <Typography
-          variant="h5"
+          variant={data.title?.length < 18 && "h6"}
+          fontSize={data.title?.length > 18 && 15}
+          color={"#fff"}
           sx={{
             fontWeight: "500",
             lineHeight: "90%",
@@ -88,7 +95,10 @@ const MediaCard = ({ id, formato }) => {
           {data.title === undefined ? data.name : data.title}
         </Typography>
         <Divider textAlign="right">
-          <Typography sx={{ fontWeight: "600", fontStyle: "oblique" }}>
+          <Typography
+            color={"#fff"}
+            sx={{ fontWeight: "600", fontStyle: "oblique" }}
+          >
             {isNaN(year) ? "" : year}
           </Typography>
         </Divider>
