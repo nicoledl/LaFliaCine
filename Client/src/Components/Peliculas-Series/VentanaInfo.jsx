@@ -31,9 +31,20 @@ const VentanaInfo = ({ id, formato }) => {
   const [data, setData] = useState([]);
   const [credits, setCredits] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [mouseHover, setMouseHover] = useState(false);
+  const [photoHover, setPhotoHover] = useState(null);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleMouseHover = (id) => {
+    setMouseHover(true);
+    setPhotoHover(id);
+  };
+  const handleMouseLeave = () => {
+    setMouseHover(false);
+    setPhotoHover(null);
+  };
 
   const urlData = `${process.env.REACT_APP_BASE_URL}${formato}/${id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=es-AR`;
   const movieCredits = `${process.env.REACT_APP_BASE_URL}${formato}/${id}/credits?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=es-AR`;
@@ -115,6 +126,7 @@ const VentanaInfo = ({ id, formato }) => {
       url(${conditionImg})`,
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
+      mx: 0.5,
     };
 
     return (
@@ -224,18 +236,50 @@ const VentanaInfo = ({ id, formato }) => {
               >
                 {credits.map((person, i) => {
                   return (
-                    <img
-                      key={i}
-                      size="lg"
-                      alt={person.name}
-                      src={API_IMG + person.profile_path}
+                    <div
                       style={{
-                        height: "max-content",
                         width: "80px",
-                        objectFit: "cover",
-                        borderRadius: "10px",
+                        height: "fit-content",
+                        position: "relative",
+                        margin: 0,
                       }}
-                    />
+                    >
+                      <img
+                        key={i}
+                        size="lg"
+                        alt={person.name}
+                        src={API_IMG + person.profile_path}
+                        style={{
+                          height: "auto",
+                          width: "80px",
+                          objectFit: "cover",
+                          borderRadius: "10px",
+                        }}
+                        onMouseEnter={() => handleMouseHover(i)}
+                      />
+                      {mouseHover && i === photoHover && (
+                        <Typography
+                          variant="p"
+                          fontFamily={"'M PLUS Rounded 1c', sans-serif"}
+                          align="center"
+                          sx={{
+                            position: "absolute",
+                            display: "flex",
+                            alignItems: "center",
+                            zIndex: "2",
+                            top: 0,
+                            left: 0,
+                            backgroundColor: "rgba(0,0,0,0.5872724089635855)",
+                            backdropFilter: "blur(5px)",
+                            borderRadius: "10px",
+                            height: "96%"
+                          }}
+                          onMouseLeave={() => handleMouseLeave(i)}
+                        >
+                          {person.name}
+                        </Typography>
+                      )}
+                    </div>
                   );
                 })}
               </ImageList>
